@@ -15,3 +15,9 @@
     --white: #fff;
     --font-family: "Jersey 20", "Jersey 15", arial;
 }
+
+ion-title.big {
+    font-size: 48px;
+    color:var(--ion-color-primary);
+    font-family: "Jersey 20", "Jersey 15", arial;
+}

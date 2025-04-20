@@ -1,0 +1,44 @@
+ion-content {
+  --background: var(--ion-color-secondary);
+}
+
+section.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 630px;
+}
+
+section.trending {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 407px;
+}
+
+section.juegos {
+    background-color: var(--ion-color-primary-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 717px;
+}
+
+section.foros {
+    background-color: var(--ion-color-accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 717px;
+}
+
+section.soporte {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
