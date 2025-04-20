@@ -1,0 +1,21 @@
+ion-card {
+    margin:1em;
+    width: auto;
+    min-width: 200px; // Ajusta según necesites
+    --padding-start: 10px;
+    --padding-end: 10px;
+    background: var(--white);
+}
+
+ion-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+ion-card-title {
+    color:var(--ion-color-dark);
+}

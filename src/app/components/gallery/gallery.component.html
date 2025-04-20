@@ -1,0 +1,12 @@
+<ion-grid>
+  <ion-row *ngFor="let row of imagesGrouped">
+    <ion-col size="6" size-sm="4" size-md="3" size-lg="2" *ngFor="let image of row">
+      <ion-card>
+        <img [src]="image.src" [alt]="image.alt" class="gallery-image">
+        <ion-card-header>
+          <ion-card-title>{{ image.title }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
