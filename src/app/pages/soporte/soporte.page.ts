@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-soporte',
   templateUrl: './soporte.page.html',
   styleUrls: ['./soporte.page.scss'],
+  standalone:false,
 })
 export class SoportePage implements OnInit {
 

@@ -21,3 +21,7 @@ ion-title.big {
     color:var(--ion-color-primary);
     font-family: "Jersey 20", "Jersey 15", arial;
 }
+
+ion-content {
+    --background: var(--ion-color-secondary);
+}
