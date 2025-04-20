@@ -31,40 +31,49 @@ ion-title {
 
 // Nav
 
+// nav y elementos de navegación
 nav {
-    display:flex;
-    flex-direction: row;
-    justify-content: left;
-    margin-left:18px;
-    margin-right:18px;
-    padding: var(--sds-size-space-800);
-    align-items: center;
-    align-content: center;
-    gap: 0px 18px;
-    flex-wrap: wrap;
-    background: var(--ion-color-primary);
-}
-
-li {
     display: flex;
-    height: 128px;
-    width:auto;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 18px;
+    margin-right: 18px;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     gap: 12px;
-
-    list-style:none;
-}
-
-li ul 
-{
-    color: #FFF;
-
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--ion-color-white);
     font-family: "Jersey 20";
     font-size: 32px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+  }
+  
+  a:hover {
+    color: var(--ion-color-gray);
+  }
+
+.header-logo-link
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ion-color-dark);
 }
 
 ion-searchbar.searchbar {

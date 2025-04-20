@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ForosPageRoutingModule } from './foros-routing.module';
-
+import { ComponentModule } from '../../components/component.module'; 
 import { ForosPage } from './foros.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { ForosPage } from './foros.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentModule,
     ForosPageRoutingModule
   ],
   declarations: [ForosPage]
