@@ -1,2 +1,17 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+@import url('https://fonts.googleapis.com/css2?family=Jersey+20&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root 
+{
+    --ion-color-primary: #3861D0;
+    --ion-color-secondary: #D0C338;
+    --ion-color-accent: #D0A538;
+    --ion-color-primary-dark: #4A587C;
+    --ion-color-dark: #3E4D51;
+    --ion-color-gray: #8B8E7E;
+    --white: #fff;
+    --font-family: "Jersey 20", "Jersey 15", arial;
+}

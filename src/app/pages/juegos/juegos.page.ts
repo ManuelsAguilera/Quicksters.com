@@ -1,0 +1,16 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-juegos',
+  templateUrl: './juegos.page.html',
+  styleUrls: ['./juegos.page.scss'],
+  standalone: false,
+})
+export class JuegosPage implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

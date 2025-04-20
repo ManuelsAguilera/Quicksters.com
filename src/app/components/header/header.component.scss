@@ -1,0 +1,90 @@
+ion-header {
+    display: flex;
+    flex-direction: row;
+    min-width: 1000px;
+    min-height: 148px;
+    padding: var(--sds-size-space-800);
+    align-items: center;
+    align-content: center;
+    gap: 0px 18px;
+    flex-wrap: wrap;
+    background: var(--ion-color-primary);
+  }
+
+ion-title {
+    font-family: 'Jersey 20';
+    font-size: 64px;
+  }
+
+.header-logo {
+    max-width: 128px;
+    max-height: 128px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+
+#header-colored {
+    color: var(--ion-color-accent); 
+}
+
+
+// Nav
+
+nav {
+    display:flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-left:18px;
+    margin-right:18px;
+    padding: var(--sds-size-space-800);
+    align-items: center;
+    align-content: center;
+    gap: 0px 18px;
+    flex-wrap: wrap;
+    background: var(--ion-color-primary);
+}
+
+li {
+    display: flex;
+    height: 128px;
+    width:auto;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+
+    list-style:none;
+}
+
+li ul 
+{
+    color: #FFF;
+
+    font-family: "Jersey 20";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+ion-searchbar.searchbar {
+    --background: var(--white);
+    --color: var(--ion-color-gray);
+    --placeholder-color: var(--ion-color-gray);
+    --icon-color: var(--ion-color-gray);
+    --clear-button-color: var(--ion-color-gray);
+  
+    --border-radius: 4px;
+}
+
+ion-button#iniciar-sesion {
+    --background: var(--ion-color-secondary);
+    --color:var(--ion-color-dark);
+    --border-radius: 8px;
+}   
+
+ion-button#registrarse {
+    --background: var(--ion-color-primary-dark);
+    --color:var(--white);
+    --border-radius: 8px;
+}
