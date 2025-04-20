@@ -6,10 +6,12 @@ import {RouterModule} from '@angular/router';
 import { HeaderComponent } from '../components/header/header.component';
 import { CarouselComponent } from '../components/carousel/carousel.component';
 import { GalleryComponent } from '../components/gallery/gallery.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [HeaderComponent,CarouselComponent,GalleryComponent], // Declara el componente
-  imports: [CommonModule,IonicModule,RouterModule], // Importa CommonModule para usar directivas básicas de Angular
-  exports: [HeaderComponent,CarouselComponent,GalleryComponent] // Exporta el componente para que otros módulos puedan usarlo
+
+  declarations: [HeaderComponent,CarouselComponent,GalleryComponent,FooterComponent], // Declara el componente
+  imports: [CommonModule,IonicModule], // Importa CommonModule para usar directivas básicas de Angular
+  exports: [HeaderComponent,CarouselComponent,GalleryComponent,FooterComponent] // Exporta el componente para que otros módulos puedan usarlo
 })
 export class ComponentModule {}
