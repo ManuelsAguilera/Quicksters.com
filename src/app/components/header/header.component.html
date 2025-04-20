@@ -1,12 +1,14 @@
 <ion-header translucent="true" >
-  <img src="assets/quicksters-256.webp" class="header-logo">
-  <ion-title><span id="header-colored">Quick</span>sters</ion-title>
+  <a routerLink="/home" routerLinkActive="active" class="header-logo-link"><img src="assets/quicksters-256.webp" class="header-logo"></a>
+    <ion-title><span id="header-colored">Quick</span>sters</ion-title>
+  
   <nav>
     <li>
-      <ul>Foros</ul>
-      <ul>Juegos</ul>
-      <ul>Soporte</ul>
-      
+      <ul class="nav-links">
+        <li><a routerLink="/foros" routerLinkActive="active">Foros</a></li>
+        <li><a routerLink="/juegos" routerLinkActive="active">Juegos</a></li>
+        <li><a routerLink="/soporte" routerLinkActive="active">Soporte</a></li>
+      </ul>
     </li>
     <div>
       <ion-searchbar placeholder="Buscar tabla.." class="searchbar" ></ion-searchbar>

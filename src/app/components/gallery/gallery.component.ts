@@ -52,7 +52,6 @@ export class GalleryComponent  implements OnInit {
     const imagesPerRow = Math.ceil(totalImages / this.rows);
     
     this.imagesGrouped = [];
-    
     // Crear las filas
     for (let i = 0; i < this.rows; i++) {
       const startIndex = i * imagesPerRow;
