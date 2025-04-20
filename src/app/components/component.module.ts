@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
 
   declarations: [HeaderComponent,CarouselComponent,GalleryComponent,FooterComponent], // Declara el componente
-  imports: [CommonModule,IonicModule], // Importa CommonModule para usar directivas básicas de Angular
+  imports: [CommonModule,IonicModule,RouterModule], // Importa CommonModule para usar directivas básicas de Angular
   exports: [HeaderComponent,CarouselComponent,GalleryComponent,FooterComponent] // Exporta el componente para que otros módulos puedan usarlo
 })
 export class ComponentModule {}
