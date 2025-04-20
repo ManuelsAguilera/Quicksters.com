@@ -37,11 +37,11 @@ export class GalleryComponent  implements OnInit {
    
   constructor() { }
 
-  @OnChanges() {
+  ngChanges() {
     this.groupImages();
   }
 
-  @OnInit() {
+  ngOnInit() {
     this.groupImages();
   }
 
