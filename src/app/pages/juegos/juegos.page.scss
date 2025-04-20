@@ -1,0 +1,37 @@
+.juegos-container {
+    --background: var(--ion-color-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .background-box {
+    background: var(--ion-color-accent); 
+    border-radius: 20px;
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .titulo-juegos {
+    background: var(--ion-color-primary);
+    color: white;
+    font-family: 'Jersey 20', sans-serif;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+  
+  .gallery-container {
+    background: var(--ion-color-primary-dark);
+    border-radius: 12px;
+    padding: 1rem;
+  }
+  
+  .custom-footer {
+    --background: var(--ion-color-primary);
+    padding: 0;
+  }
+  

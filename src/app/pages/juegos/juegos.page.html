@@ -1,11 +1,18 @@
-<ion-header [translucent]="true">
-  <app-header></app-header>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">juegos</ion-title>
-    </ion-toolbar>
+<ion-app>
+  <ion-header>
+    <app-header></app-header>
   </ion-header>
-</ion-content>
+
+  <ion-content [fullscreen]="true" class="juegos-container">
+    <div class="background-box">
+      <h1 class="titulo-juegos">Juegos</h1>
+      <div class="gallery-container">
+        <app-gallery></app-gallery>  
+      </div>
+    </div>
+  </ion-content>
+
+  <ion-footer class="custom-footer">
+    <app-footer></app-footer>
+  </ion-footer>
+</ion-app>
