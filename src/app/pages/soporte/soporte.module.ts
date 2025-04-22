@@ -12,7 +12,7 @@ import { ComponentModule } from '../../components/component.module';
     FormsModule,
     IonicModule,
     SoportePageRoutingModule,
-    ComponentModule  // Añade este módulo
+    ComponentModule  
   ],
   declarations: [SoportePage]
 })
