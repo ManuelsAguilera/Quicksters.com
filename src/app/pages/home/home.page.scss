@@ -7,7 +7,7 @@ section.hero {
     height: 630px;
     gap:4em;
     
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
         
         flex-direction: column;
         height: auto;
@@ -80,7 +80,6 @@ section.hero .hero-image-container {
 section.hero .outside-circle {
     width: 100%;
     height: 100%;
-    
     border: 10px var(--ion-color-primary) dashed;
     border-radius: 50%;  
     overflow: hidden;
@@ -90,16 +89,16 @@ section.hero .outside-circle {
 }
 
 section.hero .inside-circle {
-    width: 80%;        /* Reducido del tamaño del círculo exterior */
-    height: 80%;       /* Reducido del tamaño del círculo exterior */
+    width: 80%;        
+    height: 80%;       
     box-shadow: 0px 4px 100px rgba(var(--ion-color-accent-rgb),1) inset;
     border: 10px var(--ion-color-primary) solid;
     border-radius: 50%;  
     overflow: hidden;
     position: absolute;
-    top: 50%;          /* Centrado vertical */
-    left: 50%;         /* Centrado horizontal */
-    transform: translate(-50%, -50%); /* Ajuste para centrado perfecto */
+    top: 50%;          //Centrados vertical y horizontal
+    left: 50%;         
+    transform: translate(-50%, -50%);
 }
 section.hero .hero-image-container img {
     max-width: 255px;
@@ -168,10 +167,22 @@ section.juegos ion-title
 section.foros {
     background-color: var(--ion-color-accent);
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     justify-content: center;
     align-items: center;
-    height: 717px;
+    width:100%;
+}
+
+.foros-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    gap:10px;
 }
 
 
@@ -183,6 +194,7 @@ section.soporte {
     flex-direction:column;
     justify-content: center;
     align-items: center;
+    padding-bottom:1em;
     
     
 }

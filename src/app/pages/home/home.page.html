@@ -14,7 +14,7 @@
 
         </p>
       </div>
-      <ion-button>Busca tus<br>Juegos favoritos</ion-button>
+      <ion-button routerLink="/juegos" routerLinkActive="active" >Busca tus<br>Juegos favoritos</ion-button>
     </div>
 
     <div class ="hero-image-container"> 
@@ -39,6 +39,25 @@
     
   </section>
   <section class ="foros">
+    <!-- Reutilizando los componentes de foro-title,
+         Cuando se haga el back habra que crear estos componentes con *ng-->
+    <div class="foros-list">
+      <app-foro-title type="section-title" title="Discusiones Recientes"></app-foro-title>
+
+      <app-foro-title type="forum-title" title="Discusión General"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+      <app-foro-title type="forum-title" title="Guías"
+      description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="dark"></app-foro-title>
+      <app-foro-title type="forum-title" title="Encuentra otros jugadores"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+          <app-foro-title type="forum-title" title="Guías"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="dark"></app-foro-title>
+          <app-foro-title type="forum-title" title="Encuentra otros jugadores"
+              description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+    </div>
+
+
+
 
   </section>
   <section class="soporte">
@@ -46,7 +65,7 @@
         <div class="soporte-text-container">
           <ion-title class="big">Si necesitas ayuda habla<br>con nuestro staff</ion-title>
           
-          <ion-button>Ir a Soporte</ion-button>
+          <ion-button routerLink="/soporte" routerLinkActive="active">Ir a Soporte</ion-button>
         </div>
         <div class="soporte-img-container">
           <div class="soporte-circle"></div>
