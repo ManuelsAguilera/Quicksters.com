@@ -1,4 +1,4 @@
-import { Component, OnInit,OnChanges,Input } from '@angular/core';
+import { Component, OnInit,OnChanges,SimpleChanges,Input } from '@angular/core';
 
 interface GalleryImage {
   src: string;
@@ -18,21 +18,30 @@ export class GalleryComponent  implements OnInit {
    @Input() cantImages: number= 12;
    @Input() title:string= "no"
    
-  images: GalleryImage[] = this.createImagesList();
+  currentCantImages:number;
 
-  //Lo que mostraremos de las imagenes
-  imagesGrouped: GalleryImage[][] = [];
+  images: GalleryImage[];
 
-   
+  
   constructor() {
+    this.currentCantImages = this.cantImages;
+    this.images = this.createImagesList();
   }
 
-  ngChanges() {
-    //this.groupImages();
+  ngOnChanges(changes:SimpleChanges) {
+    if (changes['cantImages']) {
+      if (changes['cantImages'].currentValue > this.currentCantImages) {
+        this.addImagesList();
+      } else if (changes['cantImages'].currentValue < this.currentCantImages) {
+        this.images = this.images.slice(0, changes['cantImages'].currentValue);
+      }
+      
+      this.currentCantImages = changes['cantImages'].currentValue;
+    }
   }
 
   ngOnInit() {
-    //this.groupImages();
+    this.currentCantImages = this.cantImages;
   }
 
   private createImagesList():GalleryImage[]
@@ -50,21 +59,20 @@ export class GalleryComponent  implements OnInit {
     }
     return imageList;
   }
- /*
-  private groupImages()
+
+  private addImagesList()
   {
-    // Dividir las imágenes en filas
-    const totalImages = this.images.length;
-    const imagesPerRow = Math.ceil(totalImages / this.rows);
-    
-    this.imagesGrouped = [];
-    // Crear las filas
-    for (let i = 0; i < this.rows; i++) {
-      const startIndex = i * imagesPerRow;
-      const endIndex = Math.min(startIndex + imagesPerRow, totalImages);
-      this.imagesGrouped.push(this.images.slice(startIndex, endIndex));
-    }
-  }*/
+    for (let i = this.currentCantImages; i < this.cantImages; i++)
+      {
+        //Crear una imagen nueva y hacer append a nuestra lista
+        this.images.push({
+          src: `assets/shapes.svg`,  // Ciclo entre 5 imágenes de juegos
+          alt: `Juego ${i} screenshot`,
+          title: `Juego ${i}`
+        });
+  
+      }
+  }
 
 
 

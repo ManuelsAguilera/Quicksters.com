@@ -21,19 +21,10 @@
 
 ion-card {
     margin:1em;
-    width:100%;
+    width: auto;
     --padding-start: 10px;
     --padding-end: 10px;
     background: var(--white);
-    
-
-    img {
-        // 1/1
-        object-fit: cover;
-        aspect-ratio:1/1;
-
-    }
-
 }
 
 ion-card-header {

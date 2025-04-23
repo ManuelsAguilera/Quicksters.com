@@ -139,7 +139,8 @@ section.juegos {
     .galleryContainer {
         justify-content: center;
         align-items: center;
-        max-width: 1252px;
+        max-width: 1400px;
+        width: 100%;
         flex-shrink: 0;
         border-radius: 30px;
         background: var(--ion-color-primary);
