@@ -17,10 +17,25 @@ export class ForoTitleComponent  implements OnInit {
 
   typesOfTitle:string[] = ["section-title","forum-title","page-title"];
 
-  
-  constructor() { }
+  //make private variables instead of calling functions
+  protected threads:string="";
+  protected messages:string="";
+  protected lastPostName:string="";
+  protected lastPostPFP:string="";
 
-  ngOnInit() {}
+
+
+
+  constructor() { 
+
+  }
+
+  ngOnInit() {
+    this.threads = this.getPostThreads();
+    this.messages = this.getPostMessages();
+    this.lastPostName = this.getLastPostName();
+    this.lastPostPFP = this.getLastPostProfilePicture();
+  }
 
   getPostThreads() : string
   {

@@ -7,20 +7,22 @@
     </div>
 
     <div *ngSwitchCase="'forum-title'" [ngClass]="['forum-title',getColorClass()]" id="forum-title">
+      
+      
       <ion-icon name="chatbubbles-outline"></ion-icon>
       <div class="forum-title-container">
         <h1>{{title}}</h1>
         <p>{{description}}</p>
       </div>
       <div class="forum-title-stats">
-        <p>Threads: {{this.getPostThreads()}}</p>
-        <p>Mensajes:  {{this.getPostMessages()}}</p>
+        <p>Threads: {{this.threads}}</p>
+        <p>Mensajes:  {{this.messages}}</p>
       </div>
       <div class="forum-data">
         <div class="forum-profile-pic">
-          <img [src]="this.getLastPostProfilePicture()" alt="Profile Picture" class="profile-pic">
+          <img [src]="this.lastPostPFP" alt="Profile Picture" class="profile-pic">
         </div>
-        <p>{{this.getLastPostName()}}</p>
+        <p>{{this.lastPostName}}</p>
       </div>
       <ng-content></ng-content>
     </div>

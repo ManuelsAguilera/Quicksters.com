@@ -15,7 +15,7 @@
 .section-title h1
 {
     color: white;
-    font-family: "Jersey 15";
+    font-family: "Jersey 20";
     font-size: 30px;
     font-weight: 700;
     text-align: left;
@@ -69,12 +69,32 @@
     align-items: center;
     background-color: var(--ion-color-primary);
     border-radius: 13px;
+    @media (max-width:1200px)
+    {
+       
+        height: auto;
+    }
+    @media (max-width:400px)
+    {
+        flex-direction: column;
+        height: auto;
+    }
 }
 
 .forum-title ion-icon{
     color:#000;
     font-size: 48px;
     margin: 0 10px;
+    @media (max-width:1200px)
+    {
+        font-size: 64px;
+        margin: 0 5px
+    }
+
+    @media (max-width:700px)
+    {
+        font-size: 80px;
+    }
 }
 
 .forum-title-container
@@ -84,7 +104,7 @@
 
 .forum-title h1{
     color: white;
-    font-family: "Jersey 15";
+    font-family: "Jersey 20";
     font-size: 30px;
     font-weight: 700;
     text-align: left;
@@ -125,6 +145,12 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    @media (max-width:1000px)
+    {
+        flex-direction: column;
+        height: auto;
+    }
 }
 
 .forum-data
@@ -137,7 +163,8 @@
     height: 60px;
     
     overflow: hidden;
-    margin-right: 10px;
+    margin-left:auto;
+    margin-right:auto;
     
     img {
       width: 100%;
