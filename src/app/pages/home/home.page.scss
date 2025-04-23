@@ -9,6 +9,7 @@ section.hero {
     
     @media (max-width: 1200px) {
         
+        margin-top:3em;
         flex-direction: column;
         height: auto;
         gap: 2em;
@@ -24,6 +25,10 @@ section.hero ion-title {
     font-weight: 700;
     margin-bottom: 20px;
     
+    @media (max-width:700px)
+    {
+        font-size: 64px;
+    }
 }
 
 section.hero.hero-container {
@@ -55,6 +60,11 @@ section p.hero-description  {
     line-height: normal;
     letter-spacing: 1.5px;
     text-transform: uppercase;
+
+    @media (max-width:700px)
+    {
+        font-size: 24px;
+    }
 }
 
 section.hero ion-button {
@@ -125,6 +135,13 @@ section.trending {
     align-items: center;
 }
 
+.trending-games
+{
+    width: 100%;
+    margin: auto;    
+    display: flex;      
+    justify-content: center;
+}
 
 //
 section.juegos {
