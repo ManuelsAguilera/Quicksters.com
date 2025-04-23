@@ -1,7 +1,6 @@
 ion-header {
     display: flex;
     flex-direction: row;
-    min-width: 1000px;
     min-height: 148px;
     padding: var(--sds-size-space-800);
     align-items: center;
@@ -30,10 +29,49 @@ ion-title {
 }
 
 
-// Nav
+// Nav y menu
 
+.menu-button
+{
+  margin-right:0.5em;
+  display:none;
+
+}
+
+.menu-button ion-icon
+{
+  font-size:64px;
+ 
+}
+
+ion-menu ion-content {
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+
+@media (max-width:756px)
+{
+
+  ion-title {
+    font-size:32px;
+  }
+  .header-logo {
+    max-width: 64px;
+    max-height: 64px;
+  }
+  .desktop-nav {
+    display: none; 
+  }
+  .menu-button
+  {
+    display:block;
+  }
+  
+}
 // nav y elementos de navegación
 nav {
+    content-visibility: visible;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,6 +79,7 @@ nav {
     margin-right: 18px;
     gap: 18px;
     flex-wrap: wrap;
+
   }
   
   .nav-links {

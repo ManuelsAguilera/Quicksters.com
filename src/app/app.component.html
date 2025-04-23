@@ -1,3 +1,34 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <!-- Menu del header-->
+  <ion-menu side="end" menuId="first" contentId="main">
+    <ion-content id="side-menu">
+      <ion-list transparent="true">
+        <ion-item routerLink="/home" routerLinkActive="active">
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/foros" routerLinkActive="active">
+          <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+          <ion-label>Foros</ion-label>
+        </ion-item>
+        <ion-item routerLink="/juegos" routerLinkActive="active">
+          <ion-icon name="game-controller-outline" slot="start"></ion-icon>
+          <ion-label>Juegos</ion-label>
+        </ion-item>
+        <ion-item routerLink="/soporte" routerLinkActive="active">
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          <ion-label>Soporte</ion-label>
+        </ion-item>
+      </ion-list>
+      
+      <ion-searchbar placeholder="Buscar tabla.." class="menu-searchbar"></ion-searchbar>
+      
+      <div class="menu-buttons">
+        <ion-button id="iniciar-sesion-movil" expand="block">Iniciar sesión</ion-button>
+        <ion-button id="resgistrarse-movil" expand="block">Registrarse</ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
 </ion-app>

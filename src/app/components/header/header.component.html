@@ -2,7 +2,8 @@
   <a routerLink="/home" routerLinkActive="active" class="header-logo-link"><img src="assets/quicksters-256.webp" class="header-logo"></a>
     <ion-title><span id="header-colored">Quick</span>sters</ion-title>
   
-  <nav>
+    
+  <nav class="desktop-nav">
     <li>
       <ul class="nav-links">
         <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
@@ -17,6 +18,11 @@
     <ion-button id="iniciar-sesion">Iniciar sesion</ion-button>
     <ion-button id="registrarse">Registrarse</ion-button>  
   </nav>
-  
+  <ion-buttons class="menu-button">
+    <ion-button (click)="openMenu()">
+      <ion-icon icon="menu-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   
 </ion-header>
+

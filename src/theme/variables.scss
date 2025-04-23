@@ -39,3 +39,7 @@ ion-title.big {
 ion-content {
     --background: var(--ion-color-secondary);
 }
+
+ion-content#side-menu {
+    --background-color: var(--ion-color-primary-dark);
+}
