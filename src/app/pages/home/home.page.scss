@@ -133,17 +133,13 @@ section.juegos {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 717px;
-
-    
+    padding-bottom:1em;
+    padding-top:1em;
 
     .galleryContainer {
-        display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-width: 1252px;
-        min-height: 579px;
+        max-width: 1252px;
         flex-shrink: 0;
         border-radius: 30px;
         background: var(--ion-color-primary);
