@@ -1,50 +1,81 @@
 .cuadrado_externo {
-    display: flex;
-    flex-direction: row;
-  background-color:var(--ion-color-primary-dark);
-  padding: 1rem;
+  display: flex;
+  flex-direction: row; /* Cambiar a columna en móviles */
+  background-color: var(--ion-color-primary-dark);
+  padding: 2rem;
   border-radius: 10px;
   margin: 1rem;
   
-}
-.formulario-contacto {
-    width: 100%;
-    max-width: 422px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 38.3px 0 0 170px;
-    
+  @media (max-width: 1200px) {
+    flex-direction: column-reverse; /* Volver a fila en pantallas más grandes */
   }
-
-.formulario_soporte {
-  margin: 10px 20px;
 }
+
+.cuadro-formulario {
+  display:flex;
+  flex-direction:column;
+  margin: 0 auto;
+  width:100%;
+  max-width: 500px;
+}
+
+
+
+.title-container {
+  width: 100%;
+  background-color: var(--ion-color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0 1em;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.title-container h1 {
+  color: var(--White, #FFF);
+  text-align: center;
+  font-family: "Jersey 15";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.formulario-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+}
+
+
 
 .cuadrado_texto {
   text-align: center;
   color: #333;
 }
-.cuadrado_interno {
+.cuadro-texto {
+  display:flex;
+  flex-direction:column;
+  margin-right:auto;
+  width:100%;
+  max-width: 500px;
 
-    display: flex;
-    flex-direction: column;
-    background-color: var(--ion-color-accent);
-    width: 100%;
-    max-width: 558px;
-    justify-content: center;
-    align-items: center;
-    height: 501px;
-    padding: 1rem;
-    margin: 1rem 0px 0px 30rem;
-    border-radius: 35px;
-    box-sizing: border-box;
+  background-color: var(--ion-color-accent);
+  border-radius: 15px;
+  overflow:hidden;
+
+  @media(max-width:1200px)
+  {
+    margin: 1em auto;
+  }
 }
-.cuadrado_interno h1 {
+.cuadro-texto h1 {
     color: var(--White, #FFF);
     text-align: center;
     font-family: "Jersey 15";
@@ -52,7 +83,14 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+
+    @media (max-width: 600px){
+        font-size: 24px;
+    }
 }
+
+
 .img-container {
   display: flex;
   justify-content: center;
