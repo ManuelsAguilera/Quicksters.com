@@ -46,7 +46,7 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 | No funcional | RNF-04 | Interfaz clara para subidas de speedruns | La interfaz para subir speedruns debe ser clara y permitir completar el proceso en no más de **5 pasos**. |
 
 ## Prototipo de diseño 
-[Figma - Prototipo de Quicksters](https://www.figma.com/design/jdAicbMdQMN6TOhtedVpKz/Quickster?node-id=94-648&m=dev)
+[Figma - Prototipo de Quicksters](https://www.figma.com/design/jdAicbMdQMN6TOhtedVpKz/Quickster?node-id=6-68&m=dev)
 
 ---
 
