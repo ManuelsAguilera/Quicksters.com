@@ -1,7 +1,0 @@
-{
-  "name": "Quicksters",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
