@@ -1,0 +1,29 @@
+<ion-app>
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="juegos-container">
+    <div class="background-box">
+      <div class="title-box">
+        <div class="text-container">
+          <ion-title class="big">Juegos</ion-title>
+        </div>
+        
+      </div>
+      
+      <div class="gallery-container">
+        <app-gallery [cantImages]="cantidadJuegos" title="yes">Cantidad de juegos mostrados: {{cantidadJuegos}}</app-gallery>  
+      </div>
+      <div class="button-container">
+        <ion-button (click)="aumentarJuegos()">Ver más</ion-button>
+      </div>
+      
+    </div>
+    
+  </ion-content>
+
+  <ion-footer class="custom-footer">
+    <app-footer></app-footer>
+  </ion-footer>
+</ion-app>

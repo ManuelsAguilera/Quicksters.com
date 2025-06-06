@@ -1,0 +1,273 @@
+
+section.hero {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    height: 630px;
+    gap:4em;
+    
+    @media (max-width: 1200px) {
+        
+        margin-top:3em;
+        flex-direction: column;
+        height: auto;
+        gap: 2em;
+    }
+}
+
+
+
+section.hero ion-title {
+    --color: var(--ion-color-primary);
+    font-family: "Jersey 20";
+    font-size: 96px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    
+    @media (max-width:700px)
+    {
+        font-size: 64px;
+    }
+}
+
+section.hero.hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+section.hero.hero-text-container
+{
+    max-width: 599px;
+    max-height: 461px;
+    flex-shrink: 0;
+}
+
+section p.hero-description  {
+    max-width: 599px;
+    max-height: 169px;
+    flex-shrink: 0;
+
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: "Jersey 20";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    @media (max-width:700px)
+    {
+        font-size: 24px;
+    }
+}
+
+section.hero ion-button {
+    display: block;
+    margin: 20px auto 0;
+    min-width: 200px;
+    min-height: 60px;
+    max-width: 252px;
+    max-height: 103px;
+    border-radius: 15px;
+    --color: var(--white);
+}
+
+section.hero .hero-image-container {
+     /* Cambiado de 100% a 50% (son equivalentes pero 50% es más estándar) */
+    width: 392px;
+    height: 392px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;  /* Para posicionar correctamente el outside-circle */
+}
+
+section.hero .outside-circle {
+    width: 100%;
+    height: 100%;
+    border: 10px var(--ion-color-primary) dashed;
+    border-radius: 50%;  
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+section.hero .inside-circle {
+    width: 80%;        
+    height: 80%;       
+    box-shadow: 0px 4px 100px rgba(var(--ion-color-accent-rgb),1) inset;
+    border: 10px var(--ion-color-primary) solid;
+    border-radius: 50%;  
+    overflow: hidden;
+    position: absolute;
+    top: 50%;          //Centrados vertical y horizontal
+    left: 50%;         
+    transform: translate(-50%, -50%);
+}
+section.hero .hero-image-container img {
+    max-width: 255px;
+    max-height: 255px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+/***********************************/
+section.trending {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trending-games
+{
+    width: 100%;
+    margin: auto;    
+    display: flex;      
+    justify-content: center;
+}
+
+//
+section.juegos {
+    background-color: var(--ion-color-primary-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:1em;
+    padding-top:1em;
+
+    .galleryContainer {
+        justify-content: center;
+        align-items: center;
+        max-width: 1400px;
+        width: 100%;
+        flex-shrink: 0;
+        border-radius: 30px;
+        background: var(--ion-color-primary);
+        box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.25), 0px 5px 80px 25px rgba(0, 0, 0, 0.23) inset;
+    }
+    
+
+}
+
+section.juegos ion-title
+{
+    color: var(--white);
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 20px;
+}
+
+
+/**********************************/
+
+section.foros {
+    background-color: var(--ion-color-accent);
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.foros-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    gap:10px;
+}
+
+
+
+/**********************************/
+
+section.soporte {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:1em;
+    
+    
+}
+
+section.soporte .soporte-img-container {
+    width: 392px;
+    height: 392px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;  /* Para posicionar correctamente el outside-circle */
+
+}
+
+section.soporte .soporte-circle {
+    width: 100%;     
+    height: 100%;     
+    background-color: var(--ion-color-accent);  /* Color de fondo en lugar de sombra */
+    border: 20px var(--ion-color-primary-dark) solid;
+    border-radius: 50%;  
+    overflow: hidden;
+    position: absolute;
+    top: 0;          
+    left: 0;               
+}
+section.soporte .soporte-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: url("/assets/quickster-support-320.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 2;
+}
+
+section.soporte .soporte-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 599px;
+    max-height: 461px;
+    flex-shrink: 0;
+    z-index: 3;
+    padding: 20px;
+
+}
+
+section.soporte .soporte-text-container ion-button {
+    margin-top: 20px;
+    min-width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    --color: var(--white);
+    /* Añade esto para asegurarte de que el botón tiene un fondo que contraste */
+    --background: var(--ion-color-primary);
+}

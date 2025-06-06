@@ -1,0 +1,84 @@
+.footer {
+    background: var(--ion-color-primary);
+    padding: 2rem 0;
+  
+    .footer-container {
+      max-width: 800px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 0 auto;
+      padding: 0 1rem;
+      gap: 30px;
+    }
+  
+    .footer-logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 70px 30px;
+  
+      .footer-logo {
+        width: 3rem;        
+        height: auto;
+      }
+  
+      .brand-name {
+        color: var(--ion-color-accent);
+        font-family: "Jersey 20", sans-serif;
+        font-size: 40px;  
+        font-weight: 400;
+        line-height: 1.5;   
+      }
+    }
+
+    ion-title {
+        font-family: 'Jersey 20';
+        font-size: 40px;
+    }
+  
+    .footer-links {
+      display: flex;
+      flex: 1;
+      gap: 2rem;
+      flex-wrap: wrap;
+  
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;     
+  
+        h4 {
+          color: var(--ion-white);
+          font-family: "Jersey 20", sans-serif;
+          font-size: 1.125rem;  
+          font-weight: 400;
+          line-height: 1.4;     
+          margin-bottom: 0.5rem;
+        }
+  
+        a {
+          color: var(--ion-white);
+          text-decoration: none;
+          font-family: "Jersey 20", sans-serif;
+          font-size: 0.875rem;  
+          font-weight: 400;
+          line-height: 1.4;     
+          transition: text-decoration 0.2s;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    ion-icon {
+        color: var(--ion-color-secondary)
+    }
+  }
+  
+
+  

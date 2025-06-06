@@ -1,0 +1,85 @@
+* {
+  
+  --tamano-cajas: 100%;
+}
+
+.juegos-container {
+    --background: var(--ion-color-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .background-box {
+    background: var(--ion-color-accent); 
+    border-radius: 20px;
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .title-box
+  {
+    display: flex;
+    align-items: center; //verticalmente 
+    justify-content: left;
+    max-width: var(--tamano-cajas);
+    width: 100%;
+    height: 92px;
+    flex-shrink: 0;
+    border-radius: 13px;
+    background: var(--ion-color-primary-dark);
+    margin-bottom:3em;
+
+
+    .text-container
+    {
+      margin-left:1em;
+      width: 277px;
+      height: 70px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background-color: var(--ion-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    ion-title {
+      color:var(--white);
+    }
+  }
+
+  
+  .gallery-container {
+    max-width:var(--tamano-cajas);
+    width: 100%;
+    background: var(--ion-color-primary-dark);
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .button-container
+  {
+    display:flex;
+    margin-left:auto;
+    margin-right:auto;
+    max-width:600px;
+    width:100%;
+    align-items: center;
+  }
+
+  .button-container ion-button
+  {
+    display:block;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    text-align:center;
+
+  }
+  
+  .custom-footer {
+    --background: var(--ion-color-primary);
+    padding: 0;
+  }
+  

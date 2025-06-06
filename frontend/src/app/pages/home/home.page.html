@@ -1,0 +1,85 @@
+<!-- Incluir componente header importado-->
+<ion-header [translucent]="true">
+  <app-header></app-header>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <section class="hero">
+    <div class ="hero-container">
+      <div class="hero-text-container">
+        <ion-title >DOMINA TUS<br>TIEMPOS</ion-title>
+        <p class="hero-description">
+          Únete a la comunidad de QuickSters donde cada milisegundo cuenta. Compite, aprende técnicas y rompe récords con los mejores.
+
+        </p>
+      </div>
+      <ion-button routerLink="/juegos" routerLinkActive="active" >Busca tus<br>Juegos favoritos</ion-button>
+    </div>
+
+    <div class ="hero-image-container"> 
+      <div class="outside-circle"></div>
+      <div class ="inside-circle"></div>
+      <img src="assets/Quickster-Hero-320.png" class="hero-image">
+      
+    </div>
+  </section>
+
+  <section class="trending">
+    <ion-title class="big">Ultimas Tablas</ion-title>
+    <div class="trending-games">
+      <app-carousel></app-carousel>
+    </div>
+    
+  </section>
+
+
+  <section class = "juegos">
+    <div class="galleryContainer">
+      
+      <app-gallery title="yes">Juegos Más Populares</app-gallery>
+    </div>
+    
+  </section>
+  <section class ="foros">
+    <!-- Reutilizando los componentes de foro-title,
+         Cuando se haga el back habra que crear estos componentes con *ng-->
+    <div class="foros-list">
+      <app-foro-title type="section-title" title="Discusiones Recientes"></app-foro-title>
+
+      <app-foro-title type="forum-title" title="Discusión General"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+      <app-foro-title type="forum-title" title="Guías"
+      description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="dark"></app-foro-title>
+      <app-foro-title type="forum-title" title="Encuentra otros jugadores"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+          <app-foro-title type="forum-title" title="Guías"
+          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="dark"></app-foro-title>
+          <app-foro-title type="forum-title" title="Encuentra otros jugadores"
+              description="Lorem ipsum, dolor sit amet consectetur adipisicing elit." color="light"></app-foro-title>
+    </div>
+
+
+
+
+  </section>
+  <section class="soporte">
+    <section class="soporte">
+        <div class="soporte-text-container">
+          <ion-title class="big">Si necesitas ayuda habla<br>con nuestro staff</ion-title>
+          
+          <ion-button routerLink="/soporte" routerLinkActive="active">Ir a Soporte</ion-button>
+        </div>
+        <div class="soporte-img-container">
+          <div class="soporte-circle"></div>
+          <div  class="soporte-image"></div>
+        </div>
+    </section>
+  </section>
+
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
+
+</ion-content>
+
