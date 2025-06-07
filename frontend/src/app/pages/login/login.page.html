@@ -1,0 +1,33 @@
+<ion-app>
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="juegos-container">
+    <div class="background-box">
+      <div class="form-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">
+            Login
+          </ion-button>
+        
+        </form>
+      </div>
+    </div>
+
+    
+  </ion-content>
+<ion-footer class="custom-footer">
+  <app-footer></app-footer>
+</ion-footer>
+</ion-app>
