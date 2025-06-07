@@ -59,6 +59,47 @@ class Juego(db.Model):
             'url_banner': self.url_banner
         }
 
+#Tabla juegos
+class Categoria(db.Model):
+    __tablename__ = 'categoria'
+    idCategoria = db.Column(db.Integer, primary_key=True)
+    idJuego = db.Column(db.Integer, nullable=False)
+    nombre_categoria = db.Column(db.String(100), nullable=False)
+    juego = db.relationship('Juego', backref='categorias', lazy=True)
+    def to_json(self):
+        return {
+            'idCategoria': self.idCategoria,
+            'idjuego': self.idjuego,
+            'nombre_categoria': self.nombre_categoria,
+            'juego': self.juego.to_json() if self.juego else None     
+        }
+
+#Tabla speedrun
+class Speedrun(db.Model):
+    __tablename__ = 'speedrun'
+    idspeedrun = db.Column(db.Integer, primary_key=True)
+    idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
+    idcategoria = db.Column(db.Integer, db.ForeignKey('categoria.idCategoria'), nullable=False)
+    url = db.Column(db.String(255), nullable=False)
+    verificado = db.Column(db.Boolean, default=False)
+    duracion = db.Column(db.Interval, nullable=False)
+    fecha = db.Column(db.Date, nullable=False)
+    usuario = db.relationship('Usuario', backref='speedruns', lazy=True)
+    categoria = db.relationship('Categoria', backref='speedruns', lazy=True)
+    def to_json(self):
+        return {
+            'idspeedrun': self.idspeedrun,
+            'idusuario': self.idusuario,
+            'idcategoria': self.idcategoria,
+            'url': self.url,
+            'verificado': self.verificado,
+            'duracion': str(self.duracion),
+            'fecha': self.fecha.isoformat(),
+            'usuario': self.usuario.to_json() if self.usuario else None,
+            'categoria': self.categoria.to_json() if self.categoria else None
+        }
+    
+
 
 ### ENDPOINTS
 
@@ -263,6 +304,188 @@ def deleteJuego(idjuego):
         return jsonify({'message': 'Juego eliminado exitosamente'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+##REST API Endpoints para categorias
+# get: /neon/categorias   ||| te da todas las categorias
+# get: /neon/categorias/<idCategoria> ||| te da una categoria especifica
+# post: /neon/categorias, Content-Type: application/json ||| crea una categoria
+# put: /neon/categorias/<idCategoria>, Content-Type: application/json ||| actualiza una categoria
+# delete: /neon/categorias/<idCategoria> ||| elimina una categoria
+
+@app.route('/neon/categorias', methods=["GET"])
+def getCategorias():
+    try:
+        categorias = Categoria.query.all()
+        return jsonify({
+            'status': 'success',
+            'data': [categoria.to_json() for categoria in categorias],
+            'message': 'Categorias retrieved successfully'
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/neon/categorias/<int:idCategoria>', methods=["GET"])
+def getCategoria(idCategoria):
+    try:
+        categoria = Categoria.query.get(idCategoria)
+        if not categoria:
+            return jsonify({'error': 'Categoria no encontrada'}), 404
+        return jsonify(categoria.to_json())
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/neon/categorias', methods=["POST"])
+def createCategoria():
+    try:
+        if not request.is_json:
+            return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
+        
+        data = request.get_json()
+        required_fields = ['idJuego', 'nombre_categoria']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'El campo {field} es requerido'}), 400
+
+        # Crear nueva categoria
+        new_categoria = Categoria(
+            idJuego=data['idJuego'],
+            nombre_categoria=data['nombre_categoria']
+        )
+
+        db.session.add(new_categoria)
+        db.session.commit()
+
+        return jsonify(new_categoria.to_json()), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/neon/categorias/<int:idCategoria>', methods=["PUT"])
+def updateCategoria(idCategoria):
+    try:
+        categoria = Categoria.query.get(idCategoria)
+        if not categoria:
+            return jsonify({'error': 'Categoria no encontrada'}), 404
+        
+        data = request.get_json()
+        categoria.idJuego = data.get('idJuego', categoria.idJuego)
+        categoria.nombre_categoria = data.get('nombre_categoria', categoria.nombre_categoria)
+        
+        db.session.commit()
+        return jsonify(categoria.to_json())
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/neon/categorias/<int:idCategoria>', methods=["DELETE"])
+def deleteCategoria(idCategoria):
+    try:
+        categoria = Categoria.query.get(idCategoria)
+        if not categoria:
+            return jsonify({'error': 'Categoria no encontrada'}), 404
+        
+        db.session.delete(categoria)
+        db.session.commit()
+        return jsonify({'message': 'Categoria eliminada exitosamente'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+##REST API Endpoints para speedruns
+# get: /neon/speedruns   ||| te da todos los speedruns
+# get: /neon/speedruns/<idspeedrun> ||| te da un speedrun especifico
+# post: /neon/speedruns, Content-Type: application/json ||| crea un speedrun
+# put: /neon/speedruns/<idspeedrun>, Content-Type: application/json ||| actualiza un speedrun
+# delete: /neon/speedruns/<idspeedrun> ||| elimina un speedrun
+
+@app.route('/neon/speedruns', methods=["GET"])
+def getSpeedruns():
+    try:
+        speedruns = Speedrun.query.all()
+        return jsonify({
+            'status': 'success',
+            'data': [speedrun.to_json() for speedrun in speedruns],
+            'message': 'Speedruns retrieved successfully'
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/neon/speedruns/<int:idspeedrun>', methods=["GET"])
+def getSpeedrun(idspeedrun):
+    try:
+        speedrun = Speedrun.query.get(idspeedrun)
+        if not speedrun:
+            return jsonify({'error': 'Speedrun no encontrado'}), 404
+        return jsonify(speedrun.to_json())
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/neon/speedruns', methods=["POST"])
+def createSpeedrun():
+    try:
+        if not request.is_json:
+            return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
+        
+        data = request.get_json()
+        required_fields = ['idusuario', 'idcategoria', 'url', 'duracion', 'fecha']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'El campo {field} es requerido'}), 400
+
+        # Crear nuevo speedrun
+        new_speedrun = Speedrun(
+            idusuario=data['idusuario'],
+            idcategoria=data['idcategoria'],
+            url=data['url'],
+            duracion=data['duracion'],
+            fecha=data['fecha']
+        )
+
+        db.session.add(new_speedrun)
+        db.session.commit()
+
+        return jsonify(new_speedrun.to_json()), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/neon/speedruns/<int:idspeedrun>', methods=["PUT"])
+def updateSpeedrun(idspeedrun):
+    try:
+        speedrun = Speedrun.query.get(idspeedrun)
+        if not speedrun:
+            return jsonify({'error': 'Speedrun no encontrado'}), 404
+        
+        data = request.get_json()
+        speedrun.idusuario = data.get('idusuario', speedrun.idusuario)
+        speedrun.idcategoria = data.get('idcategoria', speedrun.idcategoria)
+        speedrun.url = data.get('url', speedrun.url)
+        speedrun.verificado = data.get('verificado', speedrun.verificado)
+        speedrun.duracion = data.get('duracion', speedrun.duracion)
+        speedrun.fecha = data.get('fecha', speedrun.fecha)
+        
+        db.session.commit()
+        return jsonify(speedrun.to_json())
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/neon/speedruns/<int:idspeedrun>', methods=["DELETE"])
+def deleteSpeedrun(idspeedrun):
+    try:
+        speedrun = Speedrun.query.get(idspeedrun)
+        if not speedrun:
+            return jsonify({'error': 'Speedrun no encontrado'}), 404
+        
+        db.session.delete(speedrun)
+        db.session.commit()
+        return jsonify({'message': 'Speedrun eliminado exitosamente'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 ##Esto va al final de todos los endpoints
