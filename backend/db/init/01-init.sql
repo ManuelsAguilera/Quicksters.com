@@ -120,7 +120,7 @@ CREATE TABLE `usuario` (
   `username` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `nacionalidad` varchar(50) NOT NULL,
-  `contraseña` varchar(20) NOT NULL,
+  `contraseña` varchar(100) NOT NULL,
   PRIMARY KEY (`idusuario`),
   UNIQUE KEY `idusuario_UNIQUE` (`idusuario`),
   UNIQUE KEY `username_UNIQUE` (`username`),
