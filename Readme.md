@@ -59,15 +59,47 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 ---
 
 ## Instrucciones de Ejecución
+# Instrucciones usando Docker (Recomendada)
+1. Instalar [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+2. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/ManuelsAguilera/Quicksters.com.git
+   cd Quicksters.com
+   ```
+3. Iniciar los servicios:
+   ```bash
+   docker-compose up --build
+   ```
+4. Acceder a la aplicación:
+   - Frontend: http://localhost:8100
+   - API: http://localhost:5000 
+
+Los servicios disponibles son:
+- Frontend (Ionic/Angular)
+- Backend (Flask API)
+- Base de datos (MySQL)
+
+
+## Opcion local (Sin docker)
 
 ### Requisitos previos
-1. Tener instalado [Node.js](https://nodejs.org/) (versión 16 o superior).
-2. Tener instalado Angular CLI:
+1. Node.js (versión 16 o superior)
+2. Angular CLI: `npm install -g @angular/cli`
+3. Python 3.10 o superior
+4. MySQL
+
+
+1. Instalar dependencias del frontend:
    ```bash
-   npm install -g @angular/cli
-# pasos para ejecutar 
-Pasos para ejecutar el proyecto
-1. Clona el repositorio: git clone <https://github.com/ManuelsAguilera/Quicksters.com.git>
-2. Instala las dependencias: npm install
-3. Inicia el servidor de desarrollo:ionic serve
-   
+   cd frontend
+   npm install
+   ionic serve
+   ```
+2. Instalar dependencias del backend:
+   ```bash
+   cd backends
+   python -m venv env
+   source env/bin/activate  # En Windows: env\Scripts\activate
+   pip install -r requirements.txt
+   python src/app.py
+   ```
