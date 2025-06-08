@@ -1,0 +1,12 @@
+flask==3.1.1
+flask-sqlalchemy
+flask-cors
+flask-jwt-extended
+flask-login
+flask-WTF
+flask-cors
+flask_mysqldb
+psycopg2-binary
+python-dotenv
+virtualenv
+bcrypt

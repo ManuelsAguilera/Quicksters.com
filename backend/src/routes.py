@@ -25,13 +25,13 @@ def testPost():
     })
 
 ##REST API Endpoints para Usuario
-# get: /neon/users   ||| te da todos los usuarios
-# get: /neon/users/<nombreUsuario> ||| te da un usuario especifico
-# post: /neon/users, Content-Type: application/json ||| crea un usuario
-# put: /neon/users/<id>, Content-Type: application/json ||| actualiza un usuario
-# delete: /neon/users/<id> ||| elimina un usuario
+# get: /db/users   ||| te da todos los usuarios
+# get: /db/users/<nombreUsuario> ||| te da un usuario especifico
+# post: /db/users, Content-Type: application/json ||| crea un usuario
+# put: /db/users/<id>, Content-Type: application/json ||| actualiza un usuario
+# delete: /db/users/<id> ||| elimina un usuario
 
-@api.route('/neon/users/<keyUsername>', methods=["GET"])
+@api.route('/db/users/<keyUsername>', methods=["GET"])
 def getUser(keyUsername):
     try:
         user = Usuario.query.filter_by(username=keyUsername).first()
@@ -42,7 +42,7 @@ def getUser(keyUsername):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/users', methods=["GET"])
+@api.route('/db/users', methods=["GET"])
 def getUsers():
     try:
         users = Usuario.query.all()
@@ -58,7 +58,7 @@ def getUsers():
         }), 500
 
 
-@api.route('/neon/users', methods=["POST"])
+@api.route('/db/users', methods=["POST"])
 def createUser():
     try:
         print("Accesed createUser endpoint")
@@ -74,7 +74,7 @@ def createUser():
                 return jsonify({'error': f'El campo {field} es requerido'}), 400
 
         # Crear nuevo usuario
-        new_user = Usuario(
+        new_user = Usuario( 
             username=data['username'],
             correo=data['correo'],
             nacionalidad=data.get('nacionalidad'),  # Opcionales
@@ -88,7 +88,7 @@ def createUser():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/users/<int:id>', methods=["PUT"])
+@api.route('/db/users/<int:id>', methods=["PUT"])
 def updateUser(id):
     try:
         user = Usuario.query.get(id)
@@ -106,7 +106,7 @@ def updateUser(id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/users/<int:id>', methods=["DELETE"])
+@api.route('/db/users/<int:id>', methods=["DELETE"])
 def deleteUser(id):
     try:
         user = Usuario.query.get(id)
@@ -121,13 +121,13 @@ def deleteUser(id):
 
 
 ##REST APi Endpoints para juegos
-# get: /neon/juegos   ||| te da todos los juegos
-# get: /neon/juegos/<idjuego> ||| te da un juego especifico
-# post: /neon/juegos, Content-Type: application/json ||| crea un juego
-# put: /neon/juegos/<idjuego>, Content-Type: application/json ||| actualiza un juego
-# delete: /neon/juegos/<idjuego> ||| elimina un juego
+# get: /db/juegos   ||| te da todos los juegos
+# get: /db/juegos/<idjuego> ||| te da un juego especifico
+# post: /db/juegos, Content-Type: application/json ||| crea un juego
+# put: /db/juegos/<idjuego>, Content-Type: application/json ||| actualiza un juego
+# delete: /db/juegos/<idjuego> ||| elimina un juego
 
-@api.route('/neon/juegos', methods=["GET"])
+@api.route('/db/juegos', methods=["GET"])
 def getJuegos():
     try:
         juegos = Juego.query.all()
@@ -142,7 +142,7 @@ def getJuegos():
             'message': str(e)
         }), 500
 
-@api.route('/neon/juegos/<int:idjuego>', methods=["GET"])
+@api.route('/db/juegos/<int:idjuego>', methods=["GET"])
 def getJuego(idjuego):
     try:
         juego = Juego.query.get(idjuego)
@@ -152,7 +152,7 @@ def getJuego(idjuego):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/juegos', methods=["POST"])
+@api.route('/db/juegos', methods=["POST"])
 def createJuego():
     try:
         if not request.is_json:
@@ -178,7 +178,7 @@ def createJuego():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/juegos/<int:idjuego>', methods=["PUT"])
+@api.route('/db/juegos/<int:idjuego>', methods=["PUT"])
 def updateJuego(idjuego):
     try:
         juego = Juego.query.get(idjuego)
@@ -195,7 +195,7 @@ def updateJuego(idjuego):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/juegos/<int:idjuego>', methods=["DELETE"])
+@api.route('/db/juegos/<int:idjuego>', methods=["DELETE"])
 def deleteJuego(idjuego):
     try:
         juego = Juego.query.get(idjuego)
@@ -209,13 +209,13 @@ def deleteJuego(idjuego):
         return jsonify({'error': str(e)}), 500
 
 ##REST API Endpoints para categorias
-# get: /neon/categorias   ||| te da todas las categorias
-# get: /neon/categorias/<idCategoria> ||| te da una categoria especifica
-# post: /neon/categorias, Content-Type: application/json ||| crea una categoria
-# put: /neon/categorias/<idCategoria>, Content-Type: application/json ||| actualiza una categoria
-# delete: /neon/categorias/<idCategoria> ||| elimina una categoria
+# get: /db/categorias   ||| te da todas las categorias
+# get: /db/categorias/<idCategoria> ||| te da una categoria especifica
+# post: /db/categorias, Content-Type: application/json ||| crea una categoria
+# put: /db/categorias/<idCategoria>, Content-Type: application/json ||| actualiza una categoria
+# delete: /db/categorias/<idCategoria> ||| elimina una categoria
 
-@api.route('/neon/categorias', methods=["GET"])
+@api.route('/db/categorias', methods=["GET"])
 def getCategorias():
     try:
         categorias = Categoria.query.all()
@@ -230,7 +230,7 @@ def getCategorias():
             'message': str(e)
         }), 500
 
-@api.route('/neon/categorias/<int:idCategoria>', methods=["GET"])
+@api.route('/db/categorias/<int:idCategoria>', methods=["GET"])
 def getCategoria(idCategoria):
     try:
         categoria = Categoria.query.get(idCategoria)
@@ -241,7 +241,7 @@ def getCategoria(idCategoria):
         return jsonify({'error': str(e)}), 500
 
 
-@api.route('/neon/categorias', methods=["POST"])
+@api.route('/db/categorias', methods=["POST"])
 def createCategoria():
     try:
         if not request.is_json:
@@ -267,7 +267,7 @@ def createCategoria():
         return jsonify({'error': str(e)}), 500
 
 
-@api.route('/neon/categorias/<int:idCategoria>', methods=["PUT"])
+@api.route('/db/categorias/<int:idCategoria>', methods=["PUT"])
 def updateCategoria(idCategoria):
     try:
         categoria = Categoria.query.get(idCategoria)
@@ -283,7 +283,7 @@ def updateCategoria(idCategoria):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/categorias/<int:idCategoria>', methods=["DELETE"])
+@api.route('/db/categorias/<int:idCategoria>', methods=["DELETE"])
 def deleteCategoria(idCategoria):
     try:
         categoria = Categoria.query.get(idCategoria)
@@ -297,13 +297,13 @@ def deleteCategoria(idCategoria):
         return jsonify({'error': str(e)}), 500
 
 ##REST API Endpoints para speedruns
-# get: /neon/speedruns   ||| te da todos los speedruns
-# get: /neon/speedruns/<idspeedrun> ||| te da un speedrun especifico
-# post: /neon/speedruns, Content-Type: application/json ||| crea un speedrun
-# put: /neon/speedruns/<idspeedrun>, Content-Type: application/json ||| actualiza un speedrun
-# delete: /neon/speedruns/<idspeedrun> ||| elimina un speedrun
+# get: /db/speedruns   ||| te da todos los speedruns
+# get: /db/speedruns/<idspeedrun> ||| te da un speedrun especifico
+# post: /db/speedruns, Content-Type: application/json ||| crea un speedrun
+# put: /db/speedruns/<idspeedrun>, Content-Type: application/json ||| actualiza un speedrun
+# delete: /db/speedruns/<idspeedrun> ||| elimina un speedrun
 
-@api.route('/neon/speedruns', methods=["GET"])
+@api.route('/db/speedruns', methods=["GET"])
 def getSpeedruns():
     try:
         speedruns = Speedrun.query.all()
@@ -318,7 +318,7 @@ def getSpeedruns():
             'message': str(e)
         }), 500
 
-@api.route('/neon/speedruns/<int:idspeedrun>', methods=["GET"])
+@api.route('/db/speedruns/<int:idspeedrun>', methods=["GET"])
 def getSpeedrun(idspeedrun):
     try:
         speedrun = Speedrun.query.get(idspeedrun)
@@ -328,7 +328,7 @@ def getSpeedrun(idspeedrun):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/speedruns', methods=["POST"])
+@api.route('/db/speedruns', methods=["POST"])
 def createSpeedrun():
     try:
         if not request.is_json:
@@ -356,7 +356,7 @@ def createSpeedrun():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/speedruns/<int:idspeedrun>', methods=["PUT"])
+@api.route('/db/speedruns/<int:idspeedrun>', methods=["PUT"])
 def updateSpeedrun(idspeedrun):
     try:
         speedrun = Speedrun.query.get(idspeedrun)
@@ -376,7 +376,7 @@ def updateSpeedrun(idspeedrun):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/neon/speedruns/<int:idspeedrun>', methods=["DELETE"])
+@api.route('/db/speedruns/<int:idspeedrun>', methods=["DELETE"])
 def deleteSpeedrun(idspeedrun):
     try:
         speedrun = Speedrun.query.get(idspeedrun)
