@@ -11,7 +11,8 @@
 2. [Requerimientos](#requerimientos)
 3. [Diseño de prototipos](#prototipo-de-diseño)
 4. [Librerías en Angular](#librerías-usadas-con-angular)
-5. [Instrucciones de Ejecución](#instrucciones-de-ejecución)
+5. [Objetivos Entrega Parcial](#Objetivos-Entrega-Parcial)
+6. [Instrucciones de Ejecución](#instrucciones-de-ejecución)
 
 ## Resumen del Proyecto
 Este sistema está diseñado para gestionar una plataforma competitiva de *speedruns*, donde los usuarios pueden subir sus tiempos, recibir validaciones por parte de administradores y ver reflejadas sus posiciones en rankings dinámicos. La aplicación permitirá también interacción comunitaria a través de foros, visualización de perfiles y personalización del usuario. Todo esto enfocado en fomentar la competitividad y la transparencia dentro del entorno de los videojuegos.
@@ -55,12 +56,12 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 - **@capacitor/core**: Para integrar funcionalidades nativas en aplicaciones móviles.
 
 
-## Objetivos Entrega Parcial
+# Objetivos Entrega Parcial
 
 - **EP 2.1**: Creación del servidor en Node.js con Express o Flask
     - Creamos un servidor de flask, que maneja nuestra api REST, y se conecta a una base de datos local.
 - **EP 2.2**: Configuración y modelado de la base de datos relacional.
-    - Modelamos una base de datos relacional, y la implementamos en mysql
+    - Modelamos una base de datos relacional, y la implementamos en mysql. Tiene un inicializador en ./backend/db/01-init.sql
 - **EP 2.3**: Desarrollo de API REST con endpoints básicos.
     - Hicimos los endpoints para cada tabla de nuestra base de datos, como un REST inicial.
 - **EP 2.4**: Consumo de la API desde Ionic usando HttpClient.
