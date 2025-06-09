@@ -2,20 +2,21 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Instalar Ionic CLI globalmente
+# Install Ionic CLI globally
 RUN npm install -g @ionic/cli
 
-# Copiar package.json y package-lock.json
 COPY package*.json ./
 
-# Instalar dependencias
+
 RUN npm install
 
-# Copiar el resto del código
+
 COPY . .
 
-# Puerto para desarrollo
 EXPOSE 8100
 
-# Comando para desarrollo
-CMD ["ionic", "serve", "--external"]
+ENV CHOKIDAR_USEPOLLING=true
+ENV WATCHPACK_POLLING=true
+
+# Use --host 0.0.0.0 for Docker and --poll for file watching
+CMD ["ionic", "serve", "--host", "0.0.0.0", "--poll", "1000"]

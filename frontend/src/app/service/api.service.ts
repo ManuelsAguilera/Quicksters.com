@@ -8,12 +8,12 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
 
-  private API_URL = 'http://localhost:5000/api';
+  private API_URL = 'http://localhost:5000';
 
   constructor(private http: HttpClient) {}
 
   testConnection(): Observable<any> {
-    return this.http.get(`${this.API_URL}/test`);
+    return this.http.get(`${this.API_URL}/api/test`);
   }
 
   register(username: string, correo: string, nacionalidad: string, contraseña: string, ) {
