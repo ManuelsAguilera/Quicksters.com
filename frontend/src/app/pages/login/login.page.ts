@@ -34,7 +34,17 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       console.log('Login attempt:', { email, password });
-      // Here you would add your login logic
+      this.apiService.login(email, password).subscribe(
+        response => {
+          console.log('Login successful:', response);
+          // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+        },
+        error => {
+          console.error('Login failed:', error);
+          // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje al usuario
+        }
+      );
+      
     } else {
       this.markFormGroupTouched(this.loginForm);
     }

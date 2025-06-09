@@ -38,8 +38,15 @@ ion-title.big {
 
 ion-content {
     --background: var(--ion-color-secondary);
+    padding-bottom:56px;
 }
 
 ion-content#side-menu {
     --background-color: var(--ion-color-primary-dark);
+}
+
+ion-footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }

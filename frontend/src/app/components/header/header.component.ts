@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/service/api.service';
+import { Observable } from 'rxjs';
+
 import {MenuController} from '@ionic/angular'
 
 @Component({
@@ -9,16 +12,37 @@ import {MenuController} from '@ionic/angular'
 })
 export class HeaderComponent  implements OnInit {
 
-  constructor(private menuCtrl: MenuController) { }
+  isAuthenticated$: Observable<boolean>;
+
+
+  constructor(private menuCtrl: MenuController,private apiService: ApiService) {
+    this.isAuthenticated$ = this.apiService.isAuthenticated$;
+   }
   
-  ngOnInit() {}
+
+
+
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.apiService.logout(); // This will set authState to false
+    }
+
+  }
 
   openMenu() {
-    console.log("XDD");
     this.menuCtrl.open('first');
   }
 
   closeMenu() {
     this.menuCtrl.close('first');
   }
+
+
+  logout() {
+    this.apiService.logout();
+    this.closeMenu();
+  }
+
 }
