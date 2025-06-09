@@ -1,8 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_mysqldb import MySQL
-from werkzeug.security import generate_password_hash, check_password_hash
 
-mysql = MySQL()
 db = SQLAlchemy()
 
 #Tabla usuario
@@ -39,7 +36,7 @@ class Juego(db.Model):
             'url_banner': self.url_banner
         }
 
-#Tabla juegos
+#Tabla categorias
 class Categoria(db.Model):
     __tablename__ = 'categoria'
     idCategoria = db.Column(db.Integer, primary_key=True)
