@@ -1,6 +1,11 @@
-from flask import Flask, render_template, jsonify,request,redirect, Blueprint
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import request, jsonify, Blueprint, redirect
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from classes import Usuario, Juego, Categoria, Speedrun, db
+import bcrypt
+
+from flask_mysqldb import MySQL
+mysql = MySQL() 
+
 
 api = Blueprint('api', __name__)
 
@@ -23,6 +28,58 @@ def testPost():
         'received': data,
         'status': 'success'
     })
+
+
+##API Endpoints para Registro/Login/Autenticación
+# post: /registro   ||| registra un usuario a la database
+# post: /login ||| logea al usuario
+# get: /profile ||| testeo para revisar si el token de JWT funciona correctamente
+
+@api.route('/registro', methods=['POST'])
+def register():
+    data = request.get_json()
+    new_user = Usuario( 
+        username = data['username'],
+        correo = data['correo'],
+        nacionalidad = data['nacionalidad'],
+        contraseña = bcrypt.hashpw(data['contraseña'].encode('utf-8'), bcrypt.gensalt())
+    )
+        
+    db.session.add(new_user)
+    db.session.commit()
+    
+    return jsonify({"msg": "User registered successfully"}), 201
+
+
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    correo = data['correo']
+    contraseña = data['contraseña']
+    
+    try:
+        user = Usuario.query.filter_by(correo=correo).first()
+        if user and bcrypt.checkpw(contraseña.encode('utf-8'), user.contraseña.encode('utf-8')):
+            access_token = create_access_token(identity=user.idusuario)
+            return jsonify(access_token=access_token)
+        else:
+            return jsonify({"msg": "Invalid credentials"}), 401
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+    user_id = get_jwt_identity()
+
+    try:
+        user = Usuario.query.get(user_id)
+        if user:
+            return jsonify(id=user.idusuario, username=user.username, correo=user.correo)
+        else:
+            return jsonify({"msg": "User not found"}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 ##REST API Endpoints para Usuario
 # get: /db/users   ||| te da todos los usuarios

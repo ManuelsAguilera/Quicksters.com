@@ -34,8 +34,6 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 | Funcional | RF-10 | Inicio de sesión | Los usuarios podrán iniciar sesión usando correo y contraseña. |
 | Funcional | RF-11 | Personalización de perfil | Los usuarios podrán cambiar su icono, editar su nombre y biografía, y decidir si mostrar estadísticas o récords. |
 
----
-
 ### Requerimientos No Funcionales
 
 | Tipo | ID | Título | Descripción |
@@ -45,10 +43,10 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 | No funcional | RNF-03 | Tiempos de respuesta | Las operaciones de navegación deben completarse en menos de 2 segundos en condiciones normales. |
 | No funcional | RNF-04 | Interfaz clara para subidas de speedruns | La interfaz para subir speedruns debe ser clara y permitir completar el proceso en no más de **5 pasos**. |
 
+
 ## Prototipo de diseño 
 [Figma - Prototipo de Quicksters](https://www.figma.com/design/jdAicbMdQMN6TOhtedVpKz/Quickster?node-id=6-68&m=dev)
 
----
 
 ## Librerías usadas con Angular
 
@@ -56,10 +54,30 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 - **@angular/forms**: Módulo para manejar formularios reactivos y plantillas.
 - **@capacitor/core**: Para integrar funcionalidades nativas en aplicaciones móviles.
 
----
 
-## Instrucciones de Ejecución
-# Instrucciones usando Docker (Recomendada)
+## Objetivos Entrega Parcial
+
+- **EP 2.1**: Creación del servidor en Node.js con Express o Flask
+    - Creamos un servidor de flask, que maneja nuestra api REST, y se conecta a una base de datos local.
+- **EP 2.2**: Configuración y modelado de la base de datos relacional.
+    - Modelamos una base de datos relacional, y la implementamos en mysql
+- **EP 2.3**: Desarrollo de API REST con endpoints básicos.
+    - Hicimos los endpoints para cada tabla de nuestra base de datos, como un REST inicial.
+- **EP 2.4**: Consumo de la API desde Ionic usando HttpClient.
+    - La aplicacion, permite logearse, consumiendo de la api del servidor Flask. Tambien permite posteos en el caso del registro.
+- **EP 2.5**: Implementación de autenticación con JWT (inicio de sesión/
+registro)
+    - Hacemos uso de un token de acceso con JWT a la hora de comprobar si el usuario es correcto
+- **EP 2.6**: Validación de usuarios y manejo de sesiones.
+    - Es posible loggearse dentro de la página web y mantener una sesión activa en conjunto a una opción de cerrar sesión.
+- Avances no relacionados a entrega
+    - Pasamos el proyecto a docker, para facilitar el compartir el proyecto compartiendo dependencias, y la misma base de datos.
+    - Hicimos una base de datos local mysql que se despliega junto a docker.
+    - Implementamos encriptacion usando bcrypt, para almacenar contraseñas encriptadas.
+    - Hicimos pruebas en postman, para verificar que nuestra api funcione correctamente a la hora de acceder a datos de las tablas, y el proceso de autenticacion.
+
+# Instrucciones de Ejecución
+## Instrucciones usando Docker (Recomendada)
 1. Instalar [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 2. Clonar el repositorio:
    ```bash
