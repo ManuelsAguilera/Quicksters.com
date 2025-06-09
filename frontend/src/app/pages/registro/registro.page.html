@@ -7,66 +7,50 @@
     <div class="background-box">
       <div class="form-container">
         <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
-          <ion-list>
+          
 
             <ion-item>
               <ion-icon name="person-outline" slot="start"></ion-icon>
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input type="text" name="nombre-de-usuario" required ngModel></ion-input>
+              <ion-input type="text" name="username" [(ngModel)]="registroData.username" required ngModel></ion-input>
+
             </ion-item>
             
             <ion-item>
               <ion-icon name="mail-outline" slot="start"></ion-icon>
               <ion-label position="floating">Correo electrónico</ion-label>
-              <ion-input type="email" name="email" required ngModel></ion-input>
+              <ion-input type="email" name="correo" [(ngModel)]="registroData.correo" required ></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-icon name="location-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Región</ion-label>
-              <ion-input type="text" name="Region" required ngModel></ion-input>
+              <ion-label position="floating">Nacionalidad</ion-label>
+              <ion-input type="text" name="nacionalidad" [(ngModel)]="registroData.nacionalidad" required ngModel></ion-input>
             </ion-item>
             
-            <ion-item>
-              <ion-icon name="navigate-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Comuna</ion-label>
-              <ion-input type="text" name="Comuna" required ngModel></ion-input>
-            </ion-item>
-            
-            <ion-item>
-              <ion-icon name="finger-print-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Rut</ion-label>
-              <ion-input type="text" name="Rut" required ngModel></ion-input>
-            </ion-item>
-
             <ion-item>
               <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input type="password" name="password" required ngModel></ion-input>
+              <ion-input type="password" name="password" [(ngModel)]="password" required ngModel></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
               <ion-label position="floating">Confirmar Contraseña</ion-label>
-              <ion-input type="password" name="Confirmar-Contraseña" required ngModel></ion-input>
+              <ion-input type="password" name="confPassword" [(ngModel)]="confPassword" required ngModel></ion-input>
             </ion-item>
 
-          </ion-list>
 
           <ion-button expand="block" type="submit" [disabled]="!registroForm.valid">
             Registrarse
           </ion-button>
         </form>
       </div>
-
-      <!-- Imagen en el lado derecho -->
-      <div class="right-side">
-        <img src="assets/quicksters-256.webp" alt="Ilustración de registro" class="registro-img" />
-      </div>
     </div>
 
-    <ion-footer class="custom-footer">
+    
+  </ion-content>
+  <ion-footer >
       <app-footer></app-footer>
     </ion-footer>
-  </ion-content>
 </ion-app>

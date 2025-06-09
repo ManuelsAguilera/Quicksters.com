@@ -15,8 +15,16 @@
     <div>
       <ion-searchbar placeholder="Buscar tabla.." class="searchbar" ></ion-searchbar>
     </div>
-    <ion-button id="iniciar-sesion">Iniciar sesion</ion-button>
-    <ion-button id="registrarse" routerLink="/registro">Registrarse</ion-button> 
+
+    <ng-container *ngIf="isAuthenticated$ | async; else notLogged">
+    <ion-button id="cerrar-sesion" (click)="logout()">Cerrar sesión</ion-button>
+    </ng-container>
+    
+    <ng-template #notLogged >
+      <ion-button id="iniciar-sesion" routerLink="/login">Iniciar sesión</ion-button>
+      <ion-button id="registrarse" routerLink="/registro">Registrarse</ion-button>
+    </ng-template>
+    
   </nav>
   <ion-buttons class="menu-button">
     <ion-button (click)="openMenu()">
