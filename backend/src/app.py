@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
 jwt = JWTManager(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:8100"}})
 
 db.init_app(app)
 

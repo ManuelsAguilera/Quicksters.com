@@ -56,26 +56,19 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 - **@capacitor/core**: Para integrar funcionalidades nativas en aplicaciones móviles.
 
 
-# Objetivos Entrega Parcial
+# Objetivos Entrega Final: Funcionalidades avanzadas, optimizar rendimiento y preparar aplicación para su despliegue.
 
-- **EP 2.1**: Creación del servidor en Node.js con Express o Flask
-    - Creamos un servidor de flask, que maneja nuestra api REST, y se conecta a una base de datos local.
-- **EP 2.2**: Configuración y modelado de la base de datos relacional.
-    - Modelamos una base de datos relacional, y la implementamos en mysql. Tiene un inicializador en ./backend/db/01-init.sql
-- **EP 2.3**: Desarrollo de API REST con endpoints básicos.
-    - Hicimos los endpoints para cada tabla de nuestra base de datos, como un REST inicial.
-- **EP 2.4**: Consumo de la API desde Ionic usando HttpClient.
-    - La aplicacion, permite logearse, consumiendo de la api del servidor Flask. Tambien permite posteos en el caso del registro.
-- **EP 2.5**: Implementación de autenticación con JWT (inicio de sesión/
-registro)
-    - Hacemos uso de un token de acceso con JWT a la hora de comprobar si el usuario es correcto
-- **EP 2.6**: Validación de usuarios y manejo de sesiones.
-    - Es posible loggearse dentro de la página web y mantener una sesión activa en conjunto a una opción de cerrar sesión.
-- Avances no relacionados a entrega
-    - Pasamos el proyecto a docker, para facilitar el compartir el proyecto compartiendo dependencias, y la misma base de datos.
-    - Hicimos una base de datos local mysql que se despliega junto a docker.
-    - Implementamos encriptacion usando bcrypt, para almacenar contraseñas encriptadas.
-    - Hicimos pruebas en postman, para verificar que nuestra api funcione correctamente a la hora de acceder a datos de las tablas, y el proceso de autenticacion.
+- **EF 1:** Implementación de funcionalidades completas (CRUD, notificaciones, almacenamiento local) de acuerdo a los requerimientos funcionales y no funcionales definidos.
+- **EF 2:** Mejoras en UI/UX y optimización de rendimiento.
+- **EF 3:** Implementación de seguridad avanzada en API: protección contra inyección SQL/XSS, implementación CORS seguro, y encriptación de datos sensibles con bcrypt.
+- **EF 4:** Optimización de consultas y respuesta eficiente.
+- **EF 5:** Integración con algún servicio externo (AWS o APIs de terceros).
+- Entrega:
+    - Aplicación con CRUD completo, UI/UX optimizado y seguridad web aplicada.
+    - Backend seguro con validaciones y cifrado de datos.
+    - Documentación técnica del proyecto.
+
+
 
 # Instrucciones de Ejecución
 ## Instrucciones usando Docker (Recomendada)

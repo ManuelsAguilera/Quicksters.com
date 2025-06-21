@@ -2,6 +2,7 @@ from flask import request, jsonify, Blueprint, redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from classes import Usuario, Juego, Categoria, Speedrun, db
 import bcrypt
+import bleach
 
 from flask_mysqldb import MySQL
 mysql = MySQL() 
@@ -37,27 +38,45 @@ def testPost():
 
 @api.route('/registro', methods=['POST'])
 def register():
-    data = request.get_json()
-    new_user = Usuario( 
-        username = data['username'],
-        correo = data['correo'],
-        nacionalidad = data['nacionalidad'],
-        contraseña = bcrypt.hashpw(data['contraseña'].encode('utf-8'), bcrypt.gensalt())
-    )
+    try:
+        if not request.is_json:
+            return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
         
-    db.session.add(new_user)
-    db.session.commit()
-    
-    return jsonify({"msg": "User registered successfully"}), 201
-
+        data = request.get_json()
+        required_fields = ['username', 'correo', 'nacionalidad', 'contraseña']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'El campo {field} es requerido'}), 400
+        
+        new_user = Usuario( 
+            username = bleach.clean(data['username']),
+            correo = bleach.clean(data['correo']),
+            nacionalidad = bleach.clean(data['nacionalidad']),
+            contraseña = bcrypt.hashpw(data['contraseña'].encode('utf-8'), bcrypt.gensalt())
+        )
+        
+        db.session.add(new_user)
+        db.session.commit()
+        
+        return jsonify({"msg": "User registered successfully"}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @api.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    correo = data['correo']
-    contraseña = data['contraseña']
-    
     try:
+        if not request.is_json:
+            return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
+            
+        data = request.get_json()
+        required_fields = ['correo', 'contraseña']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({'error': f'El campo {field} es requerido'}), 400
+
+        correo = data['correo']
+        contraseña = data['contraseña']
+        
         user = Usuario.query.filter_by(correo=correo).first()
         if user and bcrypt.checkpw(contraseña.encode('utf-8'), user.contraseña.encode('utf-8')):
             access_token = create_access_token(identity=user.idusuario)
@@ -70,9 +89,8 @@ def login():
 @api.route('/profile', methods=['GET'])
 @jwt_required()
 def profile():
-    user_id = get_jwt_identity()
-
     try:
+        user_id = get_jwt_identity()
         user = Usuario.query.get(user_id)
         if user:
             return jsonify(id=user.idusuario, username=user.username, correo=user.correo)
