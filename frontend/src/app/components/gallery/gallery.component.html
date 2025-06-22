@@ -6,8 +6,21 @@
 
   <ion-grid>
     <ion-row>
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let juego of juegos">
+        <ion-card>
+          <img [src]="juego.url_icono" alt="{{ juego.juego }}">
+          <ion-card-header>
+            <ion-card-title>{{ juego.juego }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-grid>
+    <ion-row> -->
       <!-- ion-row al ver que hay mas columnas para caber dentro pondra una nueva fila automaticamente-->
-      <ion-col size-xl="2" size-md="3" size-sm="6" size-x="12" *ngFor="let image of images">
+      <!-- <ion-col size-xl="2" size-md="3" size-sm="6" size-x="12" *ngFor="let image of images">
         <ion-card>
           <img [src]="image.src" [alt]="image.alt" class="gallery-image">
           <ion-card-header>
@@ -16,5 +29,5 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 </div>

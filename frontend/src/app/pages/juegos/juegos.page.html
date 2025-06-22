@@ -1,4 +1,66 @@
-<ion-app>
+<ion-app> 
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+
+  <ion-content [fullscreen]="true" class="juegos-container">
+    <div class="background-box">
+      <div class="title-box">
+        <div class="text-container">
+          <ion-title class="big">Juegos</ion-title>
+        </div>
+      </div>
+
+      <!-- Componente gallery -->
+      <div class="gallery-container">
+        <app-gallery 
+          [cantImages]="cantidadJuegos" 
+          [juegos]="juegos" 
+          title="yes">
+          Cantidad de juegos mostrados: {{ cantidadJuegos }}
+        </app-gallery>
+      </div>
+
+      <div class="button-container">
+        <ion-button (click)="aumentarJuegos()">Ver más</ion-button>
+      </div>
+    </div>
+  </ion-content>
+
+  <ion-footer class="custom-footer">
+    <app-footer></app-footer>
+  </ion-footer>
+</ion-app>
+
+
+<!-- <ion-header> PRIMER CAMBIO
+  <ion-toolbar>
+    <ion-title>Juegos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Steam AppID</ion-label>
+    <ion-input type="number" [(ngModel)]="nuevoAppid"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="importarJuego()">Importar desde Steam</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let juego of juegos">
+      <ion-thumbnail slot="start">
+        <img [src]="juego.url_icono" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ juego.juego }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content> -->
+
+
+
+<!-- <ion-app> ANTIGUO
   <ion-header>
     <app-header></app-header>
   </ion-header>
@@ -26,4 +88,4 @@
   <ion-footer class="custom-footer">
     <app-footer></app-footer>
   </ion-footer>
-</ion-app>
+</ion-app> -->

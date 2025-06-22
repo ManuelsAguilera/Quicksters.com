@@ -330,7 +330,7 @@ def getSteamGame(appid):
         return jsonify({'error': str(e)}), 500
 
 @api.route('/db/juegos/steam/<int:appid>', methods=['POST'])
-def importarJuegoDesdeSteam(appid):
+def importSteamGame(appid):
     try:
         response = requests.get(
             f'https://store.steampowered.com/api/appdetails?appids={appid}',
