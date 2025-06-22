@@ -209,7 +209,6 @@ def deleteUser(id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
 ##REST APi Endpoints para juegos
 # get: /db/juegos   ||| te da todos los juegos
 # get: /db/juegos/<idjuego> ||| te da un juego especifico
