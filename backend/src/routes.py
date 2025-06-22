@@ -136,10 +136,7 @@ def getUser(keyUsername):
 @api.route('/db/users', methods=["GET"])
 def getUsers():
     try:
-        users = Usuario.query.options(
-            joinedload(Usuario.speedruns)
-        ).all()
-
+        users = Usuario.query.all()
         return jsonify({
             'status': 'success',
             'data': [user.to_json() for user in users],
@@ -150,22 +147,6 @@ def getUsers():
             'status': 'error',
             'message': str(e)
         }), 500
-
-
-# def getUsers():
-#     try:
-#         users = Usuario.query.all()
-#         return jsonify({
-#             'status': 'success',
-#             'data': [user.to_json() for user in users],
-#             'message': 'Users retrieved successfully'
-#         }), 200
-#     except Exception as e:
-#         return jsonify({
-#             'status': 'error',
-#             'message': str(e)
-#         }), 500
-
 
 @api.route('/db/users', methods=["POST"])
 def createUser():
@@ -268,14 +249,14 @@ def createJuego():
             return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
         
         data = request.get_json()
-        required_fields = ['nombre_juego', 'url_icono', 'url_banner']
+        required_fields = ['juego', 'url_icono', 'url_banner']
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'El campo {field} es requerido'}), 400
 
         # Crear nuevo juego
         new_juego = Juego(
-            nombre_juego=data['nombre_juego'],
+            juego=data['juego'],
             url_icono=data['url_icono'],
             url_banner=data['url_banner']
         )
@@ -295,7 +276,7 @@ def updateJuego(idjuego):
             return jsonify({'error': 'Juego no encontrado'}), 404
         
         data = request.get_json()
-        juego.nombre_juego = data.get('nombre_juego', juego.nombre_juego)
+        juego.juego = data.get('juego', juego.juego)
         juego.url_icono = data.get('url_icono', juego.url_icono)
         juego.url_banner = data.get('url_banner', juego.url_banner)
         
@@ -318,7 +299,7 @@ def deleteJuego(idjuego):
         return jsonify({'error': str(e)}), 500
 
 @api.route('/api/steam/<int:appid>', methods=['GET'])
-def get_steam_game(appid):
+def getSteamGame(appid):
     try:
         response = requests.get(
             f'https://store.steampowered.com/api/appdetails?appids={appid}',
@@ -348,6 +329,52 @@ def get_steam_game(appid):
         return jsonify({'error': 'Timeout consultando a Steam'}), 504
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@api.route('/db/juegos/steam/<int:appid>', methods=['POST'])
+def importarJuegoDesdeSteam(appid):
+    try:
+        response = requests.get(
+            f'https://store.steampowered.com/api/appdetails?appids={appid}',
+            timeout=5
+        )
+        
+        if not response.ok:
+            return jsonify({'error': 'No se pudo conectar a Steam'}), 503
+
+        data = response.json().get(str(appid), {})
+        
+        if not data.get('success'):
+            return jsonify({'error': 'Juego no encontrado en Steam'}), 404
+        
+        game = data['data']
+        nombre = game.get('name')
+        url_icono = game.get('header_image')
+        url_banner = game.get('background_raw')
+
+        # Validar si ya existe por nombre
+        if Juego.query.filter_by(juego=nombre).first():
+            return jsonify({'msg': 'El juego ya existe en la base de datos'}), 409
+
+        nuevo_juego = Juego(
+            juego=nombre,
+            url_icono=url_icono,
+            url_banner=url_banner
+        )
+
+        db.session.add(nuevo_juego)
+        db.session.commit()
+
+        return jsonify(nuevo_juego.to_json()), 201
+
+    except requests.exceptions.Timeout:
+        return jsonify({'error': 'Timeout consultando a Steam'}), 504
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+
+
 
 ##REST API Endpoints para categorias
 # get: /db/categorias   ||| te da todas las categorias

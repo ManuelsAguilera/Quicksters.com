@@ -24,14 +24,14 @@ class Usuario(db.Model):
 class Juego(db.Model):
     __tablename__ = 'juegos'
     idjuego = db.Column(db.Integer, primary_key=True)
-    nombre_juego = db.Column(db.String(100), nullable=False)
+    juego = db.Column(db.String(100), nullable=False)
     url_icono = db.Column(db.String(255))
     url_banner = db.Column(db.String(255))
 
     def to_json(self):
         return {
             'idjuego': self.idjuego,
-            'nombre_juego': self.nombre_juego,
+            'juego': self.juego,
             'url_icono': self.url_icono,
             'url_banner': self.url_banner
         }
