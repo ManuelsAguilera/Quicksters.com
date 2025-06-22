@@ -12,3 +12,5 @@ python-dotenv
 virtualenv
 bcrypt
 bleach
+requests
+sqlalchemy.orm

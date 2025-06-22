@@ -3,6 +3,8 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from classes import Usuario, Juego, Categoria, Speedrun, db
 import bcrypt
 import bleach
+from sqlalchemy.orm import joinedload
+import requests
 
 from flask_mysqldb import MySQL
 mysql = MySQL() 
@@ -47,6 +49,14 @@ def register():
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'El campo {field} es requerido'}), 400
+        for key in data:
+            if key not in required_fields:
+                return jsonify({'error': f'Campo no permitido: {key}'}), 400
+        
+        if len(data['username'].strip()) < 3:
+            return jsonify({'error': 'Nombre de usuario inválido'}), 400
+        if '@' not in data['correo']:
+            return jsonify({'error': 'Correo inválido'}), 400
         
         new_user = Usuario( 
             username = bleach.clean(data['username']),
@@ -73,9 +83,15 @@ def login():
         for field in required_fields:
             if field not in data:
                 return jsonify({'error': f'El campo {field} es requerido'}), 400
+        for key in data:
+            if key not in required_fields:
+                return jsonify({'error': f'Campo no permitido: {key}'}), 400
 
-        correo = data['correo']
-        contraseña = data['contraseña']
+        if '@' not in data['correo']:
+            return jsonify({'error': 'Correo inválido'}), 400
+        
+        correo = bleach.clean(data['correo'])
+        contraseña = bleach.clean(data['contraseña'])
         
         user = Usuario.query.filter_by(correo=correo).first()
         if user and bcrypt.checkpw(contraseña.encode('utf-8'), user.contraseña.encode('utf-8')):
@@ -120,7 +136,10 @@ def getUser(keyUsername):
 @api.route('/db/users', methods=["GET"])
 def getUsers():
     try:
-        users = Usuario.query.all()
+        users = Usuario.query.options(
+            joinedload(Usuario.speedruns)
+        ).all()
+
         return jsonify({
             'status': 'success',
             'data': [user.to_json() for user in users],
@@ -131,6 +150,21 @@ def getUsers():
             'status': 'error',
             'message': str(e)
         }), 500
+
+
+# def getUsers():
+#     try:
+#         users = Usuario.query.all()
+#         return jsonify({
+#             'status': 'success',
+#             'data': [user.to_json() for user in users],
+#             'message': 'Users retrieved successfully'
+#         }), 200
+#     except Exception as e:
+#         return jsonify({
+#             'status': 'error',
+#             'message': str(e)
+#         }), 500
 
 
 @api.route('/db/users', methods=["POST"])
@@ -283,6 +317,38 @@ def deleteJuego(idjuego):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@api.route('/api/steam/<int:appid>', methods=['GET'])
+def get_steam_game(appid):
+    try:
+        response = requests.get(
+            f'https://store.steampowered.com/api/appdetails?appids={appid}',
+            timeout=5
+        )
+        
+        if not response.ok:
+            return jsonify({'error': 'No se pudo conectar a Steam'}), 503
+
+        data = response.json().get(str(appid), {})
+        
+        if not data.get('success'):
+            return jsonify({'error': 'Juego no encontrado en Steam'}), 404
+
+        game = data['data']
+        
+        return jsonify({
+            'appid': appid,
+            'nombre': game.get('name'),
+            'header_image': game.get('header_image'),  # Portada
+            'background': game.get('background_raw')#,      # Fondo/banner
+            #'descripcion': game.get('short_description'),
+            #'desarrollador': game.get('developers', [])
+        }), 200
+    
+    except requests.exceptions.Timeout:
+        return jsonify({'error': 'Timeout consultando a Steam'}), 504
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 ##REST API Endpoints para categorias
 # get: /db/categorias   ||| te da todas las categorias
 # get: /db/categorias/<idCategoria> ||| te da una categoria especifica
@@ -293,10 +359,13 @@ def deleteJuego(idjuego):
 @api.route('/db/categorias', methods=["GET"])
 def getCategorias():
     try:
-        categorias = Categoria.query.all()
+        categorias = Categoria.query.options(
+            joinedload(Categoria.juego)
+        ).all()
+
         return jsonify({
             'status': 'success',
-            'data': [categoria.to_json() for categoria in categorias],
+            'data': [c.to_json() for c in categorias],
             'message': 'Categorias retrieved successfully'
         }), 200
     except Exception as e:
@@ -304,6 +373,20 @@ def getCategorias():
             'status': 'error',
             'message': str(e)
         }), 500
+
+# def getCategorias():
+#     try:
+#         categorias = Categoria.query.all()
+#         return jsonify({
+#             'status': 'success',
+#             'data': [categoria.to_json() for categoria in categorias],
+#             'message': 'Categorias retrieved successfully'
+#         }), 200
+#     except Exception as e:
+#         return jsonify({
+#             'status': 'error',
+#             'message': str(e)
+#         }), 500
 
 @api.route('/db/categorias/<int:idCategoria>', methods=["GET"])
 def getCategoria(idCategoria):
@@ -381,17 +464,40 @@ def deleteCategoria(idCategoria):
 @api.route('/db/speedruns', methods=["GET"])
 def getSpeedruns():
     try:
-        speedruns = Speedrun.query.all()
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+
+        speedruns = Speedrun.query.options(
+            joinedload(Speedrun.usuario),
+            joinedload(Speedrun.categoria).joinedload(Categoria.juego)
+        ).paginate(page=page, per_page=per_page, error_out=False)
+
         return jsonify({
             'status': 'success',
-            'data': [speedrun.to_json() for speedrun in speedruns],
-            'message': 'Speedruns retrieved successfully'
+            'data': [s.to_json() for s in speedruns.items],
+            'total': speedruns.total,
+            'page': speedruns.page,
+            'pages': speedruns.pages
         }), 200
     except Exception as e:
         return jsonify({
             'status': 'error',
             'message': str(e)
         }), 500
+
+# def getSpeedruns():
+#     try:
+#         speedruns = Speedrun.query.all()
+#         return jsonify({
+#             'status': 'success',
+#             'data': [speedrun.to_json() for speedrun in speedruns],
+#             'message': 'Speedruns retrieved successfully'
+#         }), 200
+#     except Exception as e:
+#         return jsonify({
+#             'status': 'error',
+#             'message': str(e)
+#         }), 500
 
 @api.route('/db/speedruns/<int:idspeedrun>', methods=["GET"])
 def getSpeedrun(idspeedrun):
