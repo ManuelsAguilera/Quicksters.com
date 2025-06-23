@@ -1,0 +1,75 @@
+.juego-page {
+  --background: var(--ion-color-secondary);
+}
+
+.banner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  filter: brightness(0.5);
+}
+
+.overlay-content {
+  margin-top: 30vh;
+  padding: 16px;
+  z-index: 1;
+  position: relative;
+}
+
+.header-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  img {
+    width: 70%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.titulo-juego {
+  text-align: center;
+  margin-bottom: 16px;
+  color: black;
+  font-weight: bold;
+}
+
+.tabla-speedruns {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  color: #000;
+  font-size: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+
+  td a {
+    color: var(--ion-color-primary);
+    text-decoration: underline;
+  }
+}
+
+ion-segment {
+  --background: var(--ion-color-accent);
+  --indicator-height: 3px;
+  margin-bottom: 16px;
+}
+
+ion-card {
+  --background: var(--ion-color-accent);
+  color: #f000;
+}

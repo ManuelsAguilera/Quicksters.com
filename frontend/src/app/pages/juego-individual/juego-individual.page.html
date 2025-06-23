@@ -2,6 +2,88 @@
   <app-header></app-header>
 </ion-header>
 
+<ion-content [fullscreen]="true" class="juego-page">
+
+  <!-- Banner como fondo -->
+  <div class="banner-container" [ngStyle]="{'background-image': 'url(' + juego?.url_banner + ')'}"></div>
+
+  <!-- Contenido sobre el banner -->
+  <div class="overlay-content">
+
+    <!-- Header (imagen del juego centrada) -->
+    <div class="header-image">
+      <img [src]="juego?.url_icono" alt="Header del juego">
+    </div>
+
+    <!-- Nombre del juego -->
+    <h1 class="titulo-juego">{{ juego?.juego }}</h1>
+
+    <!-- Barra de categorías -->
+    <ion-segment [ngModel]="categoriaSeleccionada" (ngModelChange)="categoriaSeleccionada = $event; cambiarCategoria($event)">
+      <ion-segment-button *ngFor="let cat of categorias" [value]="cat.idCategoria.toString()">
+        {{ cat.nombre_categoria }}
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Tabla de speedruns -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Clasificación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <table class="tabla-speedruns">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Jugador</th>
+              <th>Duración</th>
+              <th>Fecha</th>
+              <th>Video</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let run of speedruns; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ run.usuario }}</td>
+              <td>{{ run.duracion }}</td>
+              <td>{{ run.fecha }}</td>
+              <td>
+                <a [href]="run.url_video" target="_blank">
+                  Ver
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-text *ngIf="speedruns.length === 0">
+      <p>No hay speedruns registrados para esta categoría aún.</p>
+    </ion-text>
+  </div>
+
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-header [translucent]="true">
+  <app-header></app-header>
+</ion-header>
+
 <ion-content *ngIf="juego">
   <div class="juego-page-container">
     <img [src]="juego.url_banner" alt="banner" class="juego-banner"/>
@@ -19,4 +101,4 @@
       </ion-list>
     </div>
   </div>
-</ion-content>
+</ion-content> -->

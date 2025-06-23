@@ -593,10 +593,10 @@ def obtener_speedruns(id_juego, id_categoria):
     resultados = []
     for run in runs:
         resultados.append({
-            "jugador": run.usuario.username,
+            "usuario": run.usuario.username,
             "duracion": run.duracion,
             "fecha": run.fecha.strftime("%Y-%m-%d"),
-            "video_url": run.url_video
+            "url_video": run.url_video
         })
 
     return jsonify(resultados)
