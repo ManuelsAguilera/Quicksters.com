@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { JuegosPageRoutingModule } from './juegos-routing.module';
+import { JuegoIndividualPageRoutingModule } from './juego-individual-routing.module';
 import { ComponentModule } from '../../components/component.module';
-import { JuegosPage } from './juegos.page';
+import { JuegoIndividualPage } from './juego-individual.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    JuegoIndividualPageRoutingModule,
     ComponentModule,
-    JuegosPageRoutingModule
   ],
-  declarations: [JuegosPage]
+  declarations: [JuegoIndividualPage]
 })
-export class JuegosPageModule {}
+export class JuegoIndividualPageModule {}

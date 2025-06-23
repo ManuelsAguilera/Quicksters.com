@@ -370,7 +370,19 @@ def importSteamGame(appid):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@api.route('/db/juegos/<int:idjuego>/completo', methods=["GET"])
+def getJuegoConCategorias(idjuego):
+    try:
+        juego = Juego.query.options(joinedload(Juego.categorias)).filter_by(idjuego=idjuego).first()
+        if not juego:
+            return jsonify({'error': 'Juego no encontrado'}), 404
 
+        return jsonify({
+            'juego': juego.to_json(),
+            'categorias': [categoria.to_json() for categoria in juego.categorias]
+        }), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 

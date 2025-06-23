@@ -40,7 +40,7 @@ class Juego(db.Model):
 class Categoria(db.Model):
     __tablename__ = 'categoria'
     idCategoria = db.Column(db.Integer, primary_key=True)
-    idJuego = db.Column(db.Integer, db.ForeignKey('juegos.idjuego'), nullable=False)
+    idjuego = db.Column(db.Integer, db.ForeignKey('juegos.idjuego'), nullable=False)
     nombre_categoria = db.Column(db.String(100), nullable=False)
     juego = db.relationship('Juego', backref='categorias', lazy=True)
     

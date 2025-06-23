@@ -8,16 +8,28 @@
 
 }
 
-.title
-{
+.title {
     justify-content: left;
 
     .big {
         color:var(--white)
     }
-    
 }
 
+.gallery-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  .gallery-item {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .gallery-item:hover {
+    transform: scale(1.05);
+  }
+}
 
 ion-card {
     margin:1em;
@@ -25,6 +37,7 @@ ion-card {
     --padding-start: 10px;
     --padding-end: 10px;
     background: var(--white);
+    height: 100%;
 }
 
 ion-card-header {

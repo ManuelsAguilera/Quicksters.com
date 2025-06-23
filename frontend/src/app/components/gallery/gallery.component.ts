@@ -14,7 +14,6 @@ interface GalleryImage {
   standalone:false,
 })
 export class GalleryComponent  implements OnInit {
-  //
    @Input() cantImages: number= 12;
    @Input() title:string= "no"
    @Input() juegos: any[] = [];

@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <app-header></app-header>
+</ion-header>
+
+<ion-content *ngIf="juego">
+  <div class="juego-page-container">
+    <img [src]="juego.url_banner" alt="banner" class="juego-banner"/>
+    <div class="juego-info">
+      <img [src]="juego.url_icono" alt="icono" class="juego-icono"/>
+      <h1>{{ juego.nombre_juego }}</h1>
+    </div>
+
+    <div class="categorias-lista">
+      <h2>Categorías disponibles</h2>
+      <ion-list>
+        <ion-item *ngFor="let cat of categorias">
+          {{ cat.nombre_categoria }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
