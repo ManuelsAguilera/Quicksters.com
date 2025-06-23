@@ -58,23 +58,27 @@ class Speedrun(db.Model):
     idspeedrun = db.Column(db.Integer, primary_key=True)
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'), nullable=False)
     idcategoria = db.Column(db.Integer, db.ForeignKey('categoria.idCategoria'), nullable=False)
-    url = db.Column(db.String(255), nullable=False)
+    idjuego = db.Column(db.Integer, db.ForeignKey('juegos.idjuego'), nullable=False)
+    url_video = db.Column(db.String(255), nullable=False)
     verificado = db.Column(db.Boolean, default=False)
-    duracion = db.Column(db.Interval, nullable=False)
+    duracion = db.Column(db.String(12), nullable=False)
     fecha = db.Column(db.Date, nullable=False)
     usuario = db.relationship('Usuario', backref='speedruns', lazy=True)
     categoria = db.relationship('Categoria', backref='speedruns', lazy=True)
+    juego = db.relationship('Juego', backref='speedruns', lazy=True)
     
     def to_json(self):
         return {
             'idspeedrun': self.idspeedrun,
             'idusuario': self.idusuario,
             'idcategoria': self.idcategoria,
-            'url': self.url,
+            'idusuario': self.idjuego,
+            'url': self.url_video,
             'verificado': self.verificado,
-            'duracion': str(self.duracion),
-            'fecha': self.fecha.isoformat(),
+            'duracion': self.duracion,
+            'fecha': self.fecha.strftime("%Y-%m-%d"),
             'usuario': self.usuario.to_json() if self.usuario else None,
-            'categoria': self.categoria.to_json() if self.categoria else None
+            'categoria': self.categoria.to_json() if self.categoria else None,
+            'juego': self.juego.to_json() if self.juego else None
         }
     

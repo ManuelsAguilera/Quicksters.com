@@ -384,9 +384,6 @@ def getJuegoConCategorias(idjuego):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-
-
 ##REST API Endpoints para categorias
 # get: /db/categorias   ||| te da todas las categorias
 # get: /db/categorias/<idCategoria> ||| te da una categoria especifica
@@ -502,40 +499,17 @@ def deleteCategoria(idCategoria):
 @api.route('/db/speedruns', methods=["GET"])
 def getSpeedruns():
     try:
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-
-        speedruns = Speedrun.query.options(
-            joinedload(Speedrun.usuario),
-            joinedload(Speedrun.categoria).joinedload(Categoria.juego)
-        ).paginate(page=page, per_page=per_page, error_out=False)
-
+        speedruns = Speedrun.query.all()
         return jsonify({
             'status': 'success',
-            'data': [s.to_json() for s in speedruns.items],
-            'total': speedruns.total,
-            'page': speedruns.page,
-            'pages': speedruns.pages
+            'data': [speedrun.to_json() for speedrun in speedruns],
+            'message': 'Speedruns retrieved successfully'
         }), 200
     except Exception as e:
         return jsonify({
             'status': 'error',
             'message': str(e)
         }), 500
-
-# def getSpeedruns():
-#     try:
-#         speedruns = Speedrun.query.all()
-#         return jsonify({
-#             'status': 'success',
-#             'data': [speedrun.to_json() for speedrun in speedruns],
-#             'message': 'Speedruns retrieved successfully'
-#         }), 200
-#     except Exception as e:
-#         return jsonify({
-#             'status': 'error',
-#             'message': str(e)
-#         }), 500
 
 @api.route('/db/speedruns/<int:idspeedrun>', methods=["GET"])
 def getSpeedrun(idspeedrun):
@@ -585,7 +559,7 @@ def updateSpeedrun(idspeedrun):
         data = request.get_json()
         speedrun.idusuario = data.get('idusuario', speedrun.idusuario)
         speedrun.idcategoria = data.get('idcategoria', speedrun.idcategoria)
-        speedrun.url = data.get('url', speedrun.url)
+        speedrun.url_video = data.get('url', speedrun.url_video)
         speedrun.verificado = data.get('verificado', speedrun.verificado)
         speedrun.duracion = data.get('duracion', speedrun.duracion)
         speedrun.fecha = data.get('fecha', speedrun.fecha)
@@ -607,3 +581,22 @@ def deleteSpeedrun(idspeedrun):
         return jsonify({'message': 'Speedrun eliminado exitosamente'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@api.route("/db/speedruns/juego/<int:id_juego>/categoria/<int:id_categoria>", methods=["GET"])
+def obtener_speedruns(id_juego, id_categoria):
+    runs = Speedrun.query.filter_by(
+        idjuego=id_juego,
+        idcategoria=id_categoria,
+        verificado=True
+    ).order_by(Speedrun.duracion.asc()).all()
+    
+    resultados = []
+    for run in runs:
+        resultados.append({
+            "jugador": run.usuario.username,
+            "duracion": run.duracion,
+            "fecha": run.fecha.strftime("%Y-%m-%d"),
+            "video_url": run.url_video
+        })
+
+    return jsonify(resultados)
