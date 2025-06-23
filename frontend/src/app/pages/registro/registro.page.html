@@ -1,56 +1,53 @@
-<ion-app>
-  <ion-header>
-    <app-header></app-header>
-  </ion-header>
+<ion-header>
+  <app-header></app-header>
+</ion-header>
 
-  <ion-content [fullscreen]="true" class="juegos-container">
-    <div class="background-box">
-      <div class="form-container">
-        <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
-          
+<ion-content [fullscreen]="true" class="registro-container">
+  <div class="background-box">
+    <div class="form-container">
+      <form (ngSubmit)="onSubmit()" #registroForm="ngForm" class="form">
+        
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" name="username" [(ngModel)]="registroData.username" required ngModel></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" name="correo" [(ngModel)]="registroData.correo" required ></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-icon name="person-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Nombre</ion-label>
-              <ion-input type="text" name="username" [(ngModel)]="registroData.username" required ngModel></ion-input>
+        <ion-item>
+          <ion-icon name="location-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Nacionalidad</ion-label>
+          <ion-input type="text" name="nacionalidad" [(ngModel)]="registroData.nacionalidad" required ngModel></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" name="password" [(ngModel)]="password" required ngModel></ion-input>
+        </ion-item>
 
-            </ion-item>
-            
-            <ion-item>
-              <ion-icon name="mail-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Correo electrónico</ion-label>
-              <ion-input type="email" name="correo" [(ngModel)]="registroData.correo" required ></ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input type="password" name="confPassword" [(ngModel)]="confPassword" required ngModel></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-icon name="location-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Nacionalidad</ion-label>
-              <ion-input type="text" name="nacionalidad" [(ngModel)]="registroData.nacionalidad" required ngModel></ion-input>
-            </ion-item>
-            
-            <ion-item>
-              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Contraseña</ion-label>
-              <ion-input type="password" name="password" [(ngModel)]="password" required ngModel></ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Confirmar Contraseña</ion-label>
-              <ion-input type="password" name="confPassword" [(ngModel)]="confPassword" required ngModel></ion-input>
-            </ion-item>
-
-
-          <ion-button expand="block" type="submit" [disabled]="!registroForm.valid">
-            Registrarse
-          </ion-button>
-        </form>
-      </div>
+        <ion-button expand="block" type="submit" [disabled]="!registroForm.valid">
+          Registrarse
+        </ion-button>
+        
+      </form>
     </div>
+  </div>
 
-    
-  </ion-content>
-  <ion-footer >
-      <app-footer></app-footer>
-    </ion-footer>
-</ion-app>
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
+  
+</ion-content>
+

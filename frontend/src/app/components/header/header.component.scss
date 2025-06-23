@@ -1,20 +1,20 @@
 ion-header {
-    display: flex;
-    flex-direction: row;
-    min-height: 148px;
-    padding: var(--sds-size-space-800);
-    align-items: center;
-    align-content: center;
-    gap: 0px 18px;
-    flex-wrap: wrap;
-    background: var(--ion-color-primary);
-  }
+  display: flex;
+  flex-direction: row;
+  min-height: 148px;
+  padding: var(--sds-size-space-800);
+  align-items: center;
+  align-content: center;
+  gap: 0px 18px;
+  flex-wrap: wrap;
+  background: var(--ion-color-primary);
+}
 
 ion-title {
   color: var(--white);
     font-family: 'Jersey 20';
     font-size: 64px;
-  }
+}
 
 .header-logo {
     max-width: 128px;
@@ -23,32 +23,27 @@ ion-title {
     aspect-ratio: 1/1;
 }
 
-
 #header-colored {
     color: var(--ion-color-accent); 
 }
 
-
-// Nav y menu
+// Navegación y menú
 
 .menu-button
 {
   margin-right:0.5em;
   display:none;
-
 }
 
 .menu-button ion-icon
 {
   font-size:64px;
- 
 }
 
 ion-menu ion-content {
   --padding-top: 20px;
   --padding-bottom: 20px;
 }
-
 
 @media (max-width:756px)
 {
@@ -69,71 +64,84 @@ ion-menu ion-content {
   }
   
 }
+
 // nav y elementos de navegación
 nav {
-    content-visibility: visible;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 18px;
-    margin-right: 18px;
-    gap: 18px;
-    flex-wrap: wrap;
+  content-visibility: visible;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 18px;
+  margin-right: 18px;
+  gap: 18px;
+  flex-wrap: wrap;
 
-  }
+}
   
-  .nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 12px;
-  }
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 12px;
+}
   
-  li {
-    display: flex;
-    align-items: center;
-  }
+li {
+  display: flex;
+  align-items: center;
+}
   
-  a {
-    text-decoration: none;
-    color: var(--white);
-    font-family: "Jersey 20";
-    font-size: 32px;
-    font-weight: 400;
-  }
+a {
+  text-decoration: none;
+  color: var(--white);
+  font-family: "Jersey 20";
+  font-size: 32px;
+  font-weight: 400;
+}
   
-  a:hover {
-    color: var(--ion-color-gray);
-  }
+a:hover {
+  color: var(--ion-color-gray);
+}
 
 .header-logo-link
 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-decoration: none;
-    color: var(--ion-color-dark);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  color: var(--ion-color-dark);
 }
 
 ion-searchbar.searchbar {
-    --background: var(--white);
-    --color: var(--ion-color-gray);
-    --placeholder-color: var(--ion-color-gray);
-    --icon-color: var(--ion-color-gray);
-    --clear-button-color: var(--ion-color-gray);
-  
-    --border-radius: 4px;
+  --background: var(--white);
+  --color: var(--ion-color-gray);
+  --placeholder-color: var(--ion-color-gray);
+  --icon-color: var(--ion-color-gray);
+  --clear-button-color: var(--ion-color-gray);
+
+  --border-radius: 4px;
 }
 
 ion-button#iniciar-sesion {
-    --background: var(--ion-color-secondary);
-    --color:var(--ion-color-dark);
-    --border-radius: 8px;
+  --background: var(--ion-color-secondary);
+  --color:var(--ion-color-dark);
+  --border-radius: 8px;
 }   
 
 ion-button#registrarse {
-    --background: var(--ion-color-primary-dark);
-    --color:var(--white);
-    --border-radius: 8px;
+  --background: var(--ion-color-primary-dark);
+  --color:var(--white);
+  --border-radius: 8px;
+}
+
+ion-header.oculto {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+ion-header {
+  transition: transform 0.3s ease-in-out;
+  z-index: 999; // asegura que esté sobre el contenido
+  position: sticky;
+  top: 0;
 }

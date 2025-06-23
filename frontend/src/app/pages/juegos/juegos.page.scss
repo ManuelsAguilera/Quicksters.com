@@ -4,11 +4,11 @@
 }
 
 .juegos-container {
-    --background: var(--ion-color-secondary);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  --background: var(--ion-color-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
   
   .background-box {
     background: var(--ion-color-accent); 

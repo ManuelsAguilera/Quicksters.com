@@ -39,10 +39,7 @@ Este sistema está diseñado para gestionar una plataforma competitiva de *speed
 
 | Tipo | ID | Título | Descripción |
 |------|----|--------|-------------|
-| No funcional | RNF-01 | Plazo máximo de verificación de speedruns | Las speedruns deberán ser verificadas por un administrador en un máximo de 6 días calendario. |
-| No funcional | RNF-02 | Soporte de usuarios concurrentes | El sistema debe poder manejar al menos **1000** usuarios conectados simultáneamente sin afectar el rendimiento. |
-| No funcional | RNF-03 | Tiempos de respuesta | Las operaciones de navegación deben completarse en menos de 2 segundos en condiciones normales. |
-| No funcional | RNF-04 | Interfaz clara para subidas de speedruns | La interfaz para subir speedruns debe ser clara y permitir completar el proceso en no más de **5 pasos**. |
+| No funcional | RNF-01 | Interfaz clara para subidas de speedruns | La interfaz para subir speedruns debe ser clara y permitir completar el proceso en no más de **5 pasos**. |
 
 
 ## Prototipo de diseño 

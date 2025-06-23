@@ -1,7 +1,7 @@
 .footer {
   background: var(--ion-color-primary);
   padding: 2rem 0;
-
+  
   .footer-container {
     max-width: 800px;
     width: 100%;
@@ -77,7 +77,7 @@
   }
 
   ion-icon {
-      color: var(--ion-color-secondary)
+    color: var(--ion-color-secondary)
   }
 
   @media (max-width: 600px) {

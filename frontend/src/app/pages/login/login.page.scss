@@ -1,6 +1,71 @@
+.background-box {
+    display: flex;
+    flex-direction: row;
+    background: var(--ion-color-accent); 
+    margin: 3rem auto;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    height: 50%;
+    width: 50%;
+    gap: 2rem;
+    border-radius: 10px;
+}
 
+.login-container {
+  position: relative;
+  
+}
 
-.login-form {
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    --background:var(--white);
+
+    ion-item {
+    --background: var(--white);
+    color:black;
+    
+    --border-radius: 8px;
+    margin-bottom: 10px;
+    }
+
+    .error-message {
+        color: var(--ion-color-danger);
+        font-size: 0.8rem;
+        margin-top: 4px;
+        padding-left: 16px;
+    }
+
+    ion-input {
+        --color: black;
+    }
+
+    ion-label {
+        --color: black;
+        transition: all 0.2s ease-in-out;
+    }
+
+    ion-button {
+        --background: var(--ion-color-primary);  // Color principal del botón
+        --background-hover: var(--ion-color-primary-dark);;  // Color al pasar el mouse
+        --color: var(--white);  // Color del texto
+        margin-top: 20px;  // Espacio superior
+        --border-radius: 8px;  // Bordes redondeados
+        
+        &:hover {
+            --opacity: 0.9;
+        }
+
+        &[disabled] {
+            --background: var(--ion-color-primary-dark);  // Color cuando está deshabilitado
+            --opacity: 0.85;
+        }
+    }
+}
+
+.form {
     margin:30px auto;
     display: flex;
     flex-direction: column;
