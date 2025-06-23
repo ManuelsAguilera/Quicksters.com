@@ -11,23 +11,24 @@
         </div>
       </div>
 
-      <!-- Componente gallery -->
       <div class="gallery-container">
         <app-gallery 
-          [cantImages]="cantidadJuegos" 
-          [juegos]="juegos" 
+          [cantImages]="juegosVisibles.length" 
+          [juegos]="juegosVisibles" 
           title="yes">
-          Cantidad de juegos mostrados: {{ cantidadJuegos }}
+          Cantidad de juegos mostrados: {{ juegosVisibles.length }}
         </app-gallery>
       </div>
 
       <div class="button-container">
-        <ion-button (click)="aumentarJuegos()">Ver más</ion-button>
+        <ion-button (click)="aumentarJuegos()" *ngIf="juegosVisibles.length < juegos.length">
+          Ver más
+        </ion-button>
       </div>
     </div>
   </ion-content>
 
-  <ion-footer class="custom-footer">
+  <ion-footer>
     <app-footer></app-footer>
   </ion-footer>
 </ion-app>

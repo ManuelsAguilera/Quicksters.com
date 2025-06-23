@@ -9,8 +9,11 @@ import { JuegosService } from '../../service/juegos.service';
 })
 export class JuegosPage implements OnInit {
   juegos: any[] = [];
+  juegosVisibles: any[] = []; // los que se están mostrando
   nuevoAppid: number = 0;
-  cantidadJuegos = 24;
+  cantidadJuegos = 0;
+  paginaActual = 0;
+  tamanoPagina = 8;
   
   constructor(private juegosService: JuegosService) {}
 
@@ -22,7 +25,16 @@ export class JuegosPage implements OnInit {
     this.juegosService.obtenerJuegos().subscribe((resp: any) => {
       this.juegos = resp.data;
       this.cantidadJuegos = this.juegos.length;
+      this.mostrarJuegos(); // mostrar los primeros 8
     });
+  }
+
+  mostrarJuegos() {
+    const inicio = this.paginaActual * this.tamanoPagina;
+    const fin = inicio + this.tamanoPagina;
+    const nuevosJuegos = this.juegos.slice(inicio, fin);
+    this.juegosVisibles = [...this.juegosVisibles, ...nuevosJuegos];
+    this.paginaActual++;
   }
 
   importarJuego() {
@@ -39,12 +51,13 @@ export class JuegosPage implements OnInit {
       });
     }
   }
+
   aumentarJuegos() {
-    this.cantidadJuegos += 12; // Aumentar de 12 en 12
+    this.mostrarJuegos();
   }
-  
+
   resetearJuegos() {
-    this.cantidadJuegos = 8; // Volver al valor inicial
+    this.cantidadJuegos = 6; // Volver al valor inicial
   }
 }
 

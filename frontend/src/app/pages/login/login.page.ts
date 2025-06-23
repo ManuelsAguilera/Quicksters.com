@@ -13,7 +13,10 @@ import { ApiService } from 'src/app/service/api.service';
 export class LoginPage implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private apiService: ApiService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
