@@ -106,9 +106,9 @@ Los servicios disponibles son:
    ```
 2. Instalar dependencias del backend:
    ```bash
-   cd backends
-   python -m venv env
-   source env/bin/activate  # En Windows: env\Scripts\activate
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
    pip install -r requirements.txt
    python src/app.py
    ```

@@ -56,4 +56,8 @@ export class ApiService {
   get<T>(url: string): Observable<T> {
     return this.http.get<T>(`${this.API_URL}${url}`);
   }
+
+  post(endpoint: string, data: any, options?: any) {
+    return this.http.post(this.API_URL + endpoint, data, options);
+  }
 }

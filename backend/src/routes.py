@@ -5,6 +5,7 @@ import bcrypt
 import bleach
 from sqlalchemy.orm import joinedload
 import requests
+from datetime import date
 
 from flask_mysqldb import MySQL
 mysql = MySQL() 
@@ -521,33 +522,56 @@ def getSpeedrun(idspeedrun):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@api.route('/db/speedruns', methods=["POST"])
-def createSpeedrun():
+@api.route('/db/speedruns', methods=['POST'])
+@jwt_required()
+def subir_speedrun():
+    data = request.get_json()
+    user_id = get_jwt_identity()
+
     try:
-        if not request.is_json:
-            return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
-        
-        data = request.get_json()
-        required_fields = ['idusuario', 'idcategoria', 'url', 'duracion', 'fecha']
-        for field in required_fields:
-            if field not in data:
-                return jsonify({'error': f'El campo {field} es requerido'}), 400
-
-        # Crear nuevo speedrun
-        new_speedrun = Speedrun(
-            idusuario=data['idusuario'],
+        nueva_speedrun = Speedrun(
+            idusuario=user_id,
+            idjuego=data['idjuego'],
             idcategoria=data['idcategoria'],
-            url=data['url'],
+            url_video=data['url_video'],
             duracion=data['duracion'],
-            fecha=data['fecha']
+            fecha=date.today(),
+            verificado=False
         )
-
-        db.session.add(new_speedrun)
+        
+        db.session.add(nueva_speedrun)
         db.session.commit()
-
-        return jsonify(new_speedrun.to_json()), 201
+        return jsonify({"message": "Speedrun subida con éxito", "status": "success"}), 201
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"message": "Error al subir speedrun", "error": str(e)}), 400
+
+# @api.route('/db/speedruns', methods=["POST"])
+# def createSpeedrun():
+#     try:
+#         if not request.is_json:
+#             return jsonify({'error': 'El cuerpo de la solicitud debe ser JSON'}), 400
+        
+#         data = request.get_json()
+#         required_fields = ['idusuario', 'idcategoria', 'url', 'duracion', 'fecha']
+#         for field in required_fields:
+#             if field not in data:
+#                 return jsonify({'error': f'El campo {field} es requerido'}), 400
+
+#         # Crear nuevo speedrun
+#         new_speedrun = Speedrun(
+#             idusuario=data['idusuario'],
+#             idcategoria=data['idcategoria'],
+#             url=data['url'],
+#             duracion=data['duracion'],
+#             fecha=data['fecha']
+#         )
+
+#         db.session.add(new_speedrun)
+#         db.session.commit()
+
+#         return jsonify(new_speedrun.to_json()), 201
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 @api.route('/db/speedruns/<int:idspeedrun>', methods=["PUT"])
 def updateSpeedrun(idspeedrun):
@@ -600,3 +624,25 @@ def obtener_speedruns(id_juego, id_categoria):
         })
 
     return jsonify(resultados)
+
+@api.route('/db/speedruns/pendientes', methods=['GET'])
+@jwt_required()
+def obtener_speedruns_pendientes():
+    # Solo admin debería poder acceder (mejorarlo más adelante)
+    pendientes = Speedrun.query.filter_by(verificado=False).all()
+    return jsonify([s.to_json() for s in pendientes])
+
+@api.route('/db/speedruns/<int:id>/verificar', methods=['PUT'])
+@jwt_required()
+def verificar_speedrun(id):
+    try:
+        speedrun = Speedrun.query.get(id)
+        if not speedrun:
+            return jsonify({"error": "Speedrun no encontrada"}), 404
+
+        speedrun.verificado = True
+        db.session.commit()
+        return jsonify({"msg": "Speedrun verificada correctamente"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e), "msg": "Error al verificar speedrun"}), 400
